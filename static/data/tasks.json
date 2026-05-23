@@ -1,0 +1,126 @@
+{
+  "alpha": [
+    {
+      "id": "A1",
+      "type": "Lookup",
+      "text": "Какой Private IP у виртуальной машины <code>api-prod-1</code>?",
+      "resources": ["api-prod-1"],
+      "answer": "10.0.1.45",
+      "answer_section": "Сеть"
+    },
+    {
+      "id": "A2",
+      "type": "Lookup",
+      "text": "Какой размер Data Disk у базы данных <code>postgres-prod</code>?",
+      "resources": ["postgres-prod"],
+      "answer": "500 GB",
+      "answer_section": "Хранилище"
+    },
+    {
+      "id": "A3",
+      "type": "Comparison",
+      "text": "У какой виртуальной машины выше Memory Usage: <code>api-prod-1</code> или <code>api-prod-2</code>? На сколько процентных пунктов?",
+      "resources": ["api-prod-1", "api-prod-2"],
+      "answer": "api-prod-2: 81% vs 74% = разница 7 п.п.",
+      "answer_section": "Мониторинг"
+    },
+    {
+      "id": "A4",
+      "type": "Comparison",
+      "text": "Сравните Replication Lag у <code>postgres-prod</code> и <code>postgres-replica-1</code>. У какого ресурса значение больше?",
+      "resources": ["postgres-prod", "postgres-replica-1"],
+      "answer": "postgres-replica-1: 120 ms vs 0 ms",
+      "answer_section": "Мониторинг"
+    },
+    {
+      "id": "A5",
+      "type": "Diagnosis",
+      "text": "Почему база данных <code>postgres-replica-1</code> тормозит?",
+      "resources": ["postgres-replica-1"],
+      "answer": "CPU Usage: 95.54% — ресурс полностью исчерпан",
+      "answer_section": "Мониторинг"
+    },
+    {
+      "id": "A6",
+      "type": "Diagnosis",
+      "text": "Виртуальная машина <code>api-prod-3</code> (подсеть 10.0.2.0/24) не может подключиться к <code>postgres-prod</code> по порту 5432. Изучите правило файрвола <code>allow-db-access</code> и сетевые настройки. Какова вероятная причина?",
+      "resources": ["api-prod-3", "allow-db-access", "postgres-prod"],
+      "answer": "Правило allow-db-access разрешает Source Ranges только 10.0.1.0/24 (subnet-app), а api-prod-3 в 10.0.2.0/24 (subnet-workers) — подключение блокируется файрволом",
+      "answer_section": "Правила"
+    }
+  ],
+  "beta": [
+    {
+      "id": "B1",
+      "type": "Lookup",
+      "text": "Какой Private IP у виртуальной машины <code>gateway-main</code>?",
+      "resources": ["gateway-main"],
+      "answer": "172.16.1.20",
+      "answer_section": "Сеть"
+    },
+    {
+      "id": "B2",
+      "type": "Lookup",
+      "text": "Какой размер Data Disk у базы данных <code>mysql-primary</code>?",
+      "resources": ["mysql-primary"],
+      "answer": "1 TB",
+      "answer_section": "Хранилище"
+    },
+    {
+      "id": "B3",
+      "type": "Comparison",
+      "text": "У какой виртуальной машины выше Memory Usage: <code>gateway-main</code> или <code>gateway-backup</code>? На сколько процентных пунктов?",
+      "resources": ["gateway-main", "gateway-backup"],
+      "answer": "gateway-main: 69% vs 55% = разница 14 п.п.",
+      "answer_section": "Мониторинг"
+    },
+    {
+      "id": "B4",
+      "type": "Comparison",
+      "text": "У какой виртуальной машины выше CPU Usage: <code>gateway-main</code> или <code>gateway-3</code>? На сколько процентных пунктов?",
+      "resources": ["gateway-main", "gateway-3"],
+      "answer": "gateway-3: 85% vs 58% = разница 27 п.п.",
+      "answer_section": "Мониторинг"
+    },
+    {
+      "id": "B5",
+      "type": "Diagnosis",
+      "text": "Почему к виртуальной машине <code>gateway-3</code> не получается подключиться из внешней сети по SSH?",
+      "resources": ["gateway-3"],
+      "answer": "Нет публичного IP (Public IP: —) — SSH недоступен снаружи",
+      "answer_section": "Сеть"
+    },
+    {
+      "id": "B6",
+      "type": "Diagnosis",
+      "text": "Из поддержки пришла жалоба: в админке обновили данные, но пользователь не видит обновлённые данные у себя в интерфейсе. По логам вы видите, что данные записались в базу данных <code>mysql-primary</code>. В чём может быть проблема? Оцените её масштаб.",
+      "resources": ["mysql-primary", "mysql-replica-1"],
+      "answer": "Replication Lag: 85 ms на mysql-replica-1 — пользователь читает с реплики, которая отстаёт от мастера",
+      "answer_section": "Мониторинг"
+    }
+  ],
+  "practice": {
+    "alpha": {
+      "id": "PRACTICE",
+      "type": "Lookup",
+      "text": "Ознакомительное задание: какая ОС установлена на виртуальной машине <code>ecom-api-1</code>?",
+      "resources": ["ecom-api-1"],
+      "answer": "Debian 12 (Bookworm)",
+      "answer_section": "Основные параметры"
+    },
+    "beta": {
+      "id": "PRACTICE",
+      "type": "Lookup",
+      "text": "Ознакомительное задание: какая ОС установлена на виртуальной машине <code>staging-gateway-1</code>?",
+      "resources": ["staging-gateway-1"],
+      "answer": "Debian 12 (Bookworm)",
+      "answer_section": "Основные параметры"
+    }
+  },
+  "valid_orders": [
+    [0, 2, 4, 1, 3, 5],
+    [2, 0, 4, 3, 1, 5],
+    [4, 0, 2, 1, 5, 3],
+    [0, 4, 2, 5, 1, 3]
+  ]
+}
