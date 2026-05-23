@@ -1,0 +1,586 @@
+{
+  "name": "beta",
+  "label": "Fintech Platform",
+  "resources": {
+    "vms": [
+      {
+        "id": "gateway-main",
+        "type": "vm",
+        "status": "Running",
+        "key_info": "172.16.1.20 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard D4as v5",
+            "vCPU": "4",
+            "RAM": "16 GB",
+            "OS": "Rocky Linux 9.3",
+            "Image": "rocky-9-v20240720",
+            "Created": "2024-07-20",
+            "Region": "us-east-2",
+            "Zone": "us-east-2a",
+            "Uptime": "62d 8h"
+          },
+          "Сеть": {
+            "Private IP": "172.16.1.20",
+            "Public IP": "44.205.78.112",
+            "Subnet": "172.16.1.0/24",
+            "Subnet Name": "subnet-gateway",
+            "VPC": "vpc-fintech-prod",
+            "Internal DNS": "gateway-main.internal",
+            "MAC Address": "06:3a:bf:22:c1:4e"
+          },
+          "Диски": {
+            "Boot Disk": "50 GB SSD (pd-ssd)",
+            "Data Disk": "200 GB SSD (pd-ssd)",
+            "IOPS": "3000 read / 3000 write",
+            "Throughput": "125 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Snapshots": "5 (latest: 2025-01-19)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-gateway-prod",
+            "Firewall Tags": "allow-https, allow-vpc",
+            "SSH Key": "ops-key-prod (ED25519)",
+            "Service Account": "gw-vm-sa@fintech.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "58%",
+            "Memory Usage": "69%",
+            "Disk Read Ops": "520 ops/s",
+            "Disk Write Ops": "190 ops/s",
+            "Network In": "340 Mbps",
+            "Network Out": "280 Mbps",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "platform",
+            "Application": "payment-gateway",
+            "Version": "3.2.1",
+            "Cost Center": "CC-7100",
+            "Startup Script": "/opt/deploy/run-gateway.sh"
+          }
+        }
+      },
+      {
+        "id": "gateway-backup",
+        "type": "vm",
+        "status": "Running",
+        "key_info": "172.16.1.21 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard D4as v5",
+            "vCPU": "4",
+            "RAM": "16 GB",
+            "OS": "Rocky Linux 9.3",
+            "Image": "rocky-9-v20240720",
+            "Created": "2024-07-20",
+            "Region": "us-east-2",
+            "Zone": "us-east-2b",
+            "Uptime": "62d 8h"
+          },
+          "Сеть": {
+            "Private IP": "172.16.1.21",
+            "Public IP": "44.205.78.118",
+            "Subnet": "172.16.1.0/24",
+            "Subnet Name": "subnet-gateway",
+            "VPC": "vpc-fintech-prod",
+            "Internal DNS": "gateway-backup.internal",
+            "MAC Address": "06:3a:bf:22:c1:4f"
+          },
+          "Диски": {
+            "Boot Disk": "50 GB SSD (pd-ssd)",
+            "Data Disk": "200 GB SSD (pd-ssd)",
+            "IOPS": "3000 read / 3000 write",
+            "Throughput": "125 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Snapshots": "5 (latest: 2025-01-19)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-gateway-prod",
+            "Firewall Tags": "allow-https, allow-vpc",
+            "SSH Key": "ops-key-prod (ED25519)",
+            "Service Account": "gw-vm-sa@fintech.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "41%",
+            "Memory Usage": "55%",
+            "Disk Read Ops": "290 ops/s",
+            "Disk Write Ops": "85 ops/s",
+            "Network In": "180 Mbps",
+            "Network Out": "140 Mbps",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "platform",
+            "Application": "payment-gateway",
+            "Version": "3.2.1",
+            "Cost Center": "CC-7100",
+            "Startup Script": "/opt/deploy/run-gateway.sh"
+          }
+        }
+      },
+      {
+        "id": "gateway-3",
+        "type": "vm",
+        "status": "Warning",
+        "key_info": "172.16.2.10 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard E4as v5",
+            "vCPU": "4",
+            "RAM": "32 GB",
+            "OS": "Ubuntu 24.04 LTS",
+            "Image": "ubuntu-2404-lts-v20240915",
+            "Created": "2024-09-15",
+            "Region": "us-east-2",
+            "Zone": "us-east-2a",
+            "Uptime": "88d 3h"
+          },
+          "Сеть": {
+            "Private IP": "172.16.2.10",
+            "Public IP": "\u2014",
+            "Subnet": "172.16.2.0/24",
+            "Subnet Name": "subnet-batch",
+            "VPC": "vpc-fintech-prod",
+            "Internal DNS": "gateway-3.internal",
+            "MAC Address": "06:3a:bf:22:c2:11"
+          },
+          "Диски": {
+            "Boot Disk": "30 GB SSD (pd-ssd)",
+            "Data Disk": "1 TB HDD (pd-standard)",
+            "IOPS": "750 read / 750 write",
+            "Throughput": "60 MB/s",
+            "Encryption": "AES-256 (platform-managed)",
+            "Snapshots": "2 (latest: 2025-01-15)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-gateway-prod",
+            "Firewall Tags": "allow-https, allow-vpc",
+            "SSH Key": "ops-key-prod (ED25519)",
+            "Service Account": "gw-vm-sa@fintech.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "85%",
+            "Memory Usage": "92%",
+            "Disk Read Ops": "710 ops/s",
+            "Disk Write Ops": "440 ops/s",
+            "Network In": "150 Mbps",
+            "Network Out": "90 Mbps",
+            "Health Status": "Degraded",
+            "Open Alerts": "3"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "platform",
+            "Application": "payment-gateway",
+            "Version": "2.1.0",
+            "Cost Center": "CC-7200",
+            "Startup Script": "/opt/deploy/run-gateway.sh"
+          }
+        }
+      },
+      {
+        "id": "staging-gateway-1",
+        "type": "vm",
+        "status": "Stopped",
+        "key_info": "172.16.10.5 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard B2s",
+            "vCPU": "2",
+            "RAM": "4 GB",
+            "OS": "Debian 12 (Bookworm)",
+            "Image": "debian-12-bookworm-v20241210",
+            "Created": "2024-12-15",
+            "Region": "us-east-2",
+            "Zone": "us-east-2b",
+            "Uptime": "0d 0h (stopped)"
+          },
+          "Сеть": {
+            "Private IP": "172.16.10.5",
+            "Public IP": "—",
+            "Subnet": "172.16.10.0/24",
+            "Subnet Name": "subnet-staging",
+            "VPC": "vpc-fintech-prod",
+            "Internal DNS": "staging-gateway-1.internal",
+            "MAC Address": "06:3a:bf:22:1a:05"
+          },
+          "Диски": {
+            "Boot Disk": "20 GB SSD (pd-ssd)",
+            "Data Disk": "—",
+            "IOPS": "—",
+            "Throughput": "—",
+            "Encryption": "AES-256 (CMEK)",
+            "Snapshots": "0"
+          },
+          "Безопасность": {
+            "Security Group": "sg-staging",
+            "Firewall Tags": "allow-vpc",
+            "SSH Key": "ops-key-staging (ED25519)",
+            "Service Account": "staging-gw-sa@fintech.iam",
+            "IAM Role": "roles/compute.viewer"
+          },
+          "Мониторинг": {
+            "CPU Usage": "0%",
+            "Memory Usage": "0%",
+            "Health Status": "Stopped",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "staging",
+            "Team": "platform",
+            "Application": "payment-gateway",
+            "Version": "3.3.0-rc1",
+            "Cost Center": "CC-7100"
+          }
+        }
+      }
+    ],
+    "dbs": [
+      {
+        "id": "mysql-primary",
+        "type": "db",
+        "status": "Running",
+        "key_info": "MySQL 8.0.35 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Engine": "MySQL 8.0.35",
+            "Tier": "db-custom-8-32768 (8 vCPU, 32 GB)",
+            "Created": "2024-05-10",
+            "Region": "us-east-2",
+            "Zone": "us-east-2a",
+            "Uptime": "178d 14h",
+            "High Availability": "Enabled (failover: us-east-2b)"
+          },
+          "Сеть": {
+            "Private IP": "172.16.3.10",
+            "Public IP": "\u2014 (disabled)",
+            "Subnet": "172.16.3.0/24",
+            "Subnet Name": "subnet-db",
+            "VPC": "vpc-fintech-prod",
+            "Connection Endpoint": "172.16.3.10:3306",
+            "Authorized Networks": "172.16.1.0/24, 172.16.2.0/24",
+            "SSL Mode": "require"
+          },
+          "Хранилище": {
+            "Disk Type": "SSD (pd-ssd)",
+            "Data Disk": "1 TB",
+            "Used Space": "620 GB (62%)",
+            "Auto Resize": "Enabled (max 2 TB)",
+            "IOPS": "10000 read / 10000 write",
+            "Throughput": "400 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Backup Size": "510 GB"
+          },
+          "Безопасность": {
+            "SSL Enforced": "Yes",
+            "IAM Authentication": "Enabled",
+            "Public IP Disabled": "Yes",
+            "Allowed CIDR": "172.16.1.0/24, 172.16.2.0/24",
+            "Database Flags": "general_log=OFF, slow_query_log=ON",
+            "Audit Log": "Enabled",
+            "Last Security Patch": "2025-01-10"
+          },
+          "Мониторинг": {
+            "CPU Usage": "44%",
+            "Memory Usage": "71%",
+            "Active Connections": "125 / 500",
+            "Replication Lag": "0 ms (primary)",
+            "Transactions/sec": "3,800",
+            "Query Latency P50": "2 ms",
+            "Query Latency P99": "18 ms",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Обслуживание": {
+            "Backup Schedule": "Daily 04:00 UTC",
+            "Backup Retention": "30 days",
+            "Last Backup": "2025-01-20 04:00 UTC",
+            "Maintenance Window": "Saturday 05:00\u201306:00 UTC",
+            "Point-in-Time Recovery": "Enabled (7 days)",
+            "Replicas": "1 (mysql-replica-1)",
+            "Parameter Profile": "mysql80-fintech-optimized"
+          }
+        }
+      },
+      {
+        "id": "mysql-replica-1",
+        "type": "db",
+        "status": "Running",
+        "key_info": "MySQL 8.0.35 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Engine": "MySQL 8.0.35",
+            "Tier": "db-custom-4-16384 (4 vCPU, 16 GB)",
+            "Created": "2024-05-12",
+            "Region": "us-east-2",
+            "Zone": "us-east-2b",
+            "Uptime": "178d 12h",
+            "High Availability": "\u2014 (read replica)"
+          },
+          "Сеть": {
+            "Private IP": "172.16.3.11",
+            "Public IP": "\u2014 (disabled)",
+            "Subnet": "172.16.3.0/24",
+            "Subnet Name": "subnet-db",
+            "VPC": "vpc-fintech-prod",
+            "Connection Endpoint": "172.16.3.11:3306",
+            "Authorized Networks": "172.16.1.0/24",
+            "SSL Mode": "require"
+          },
+          "Хранилище": {
+            "Disk Type": "SSD (pd-ssd)",
+            "Data Disk": "1 TB",
+            "Used Space": "620 GB (62%)",
+            "Auto Resize": "Enabled (max 2 TB)",
+            "IOPS": "6000 read / 6000 write",
+            "Throughput": "250 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Backup Size": "\u2014"
+          },
+          "Безопасность": {
+            "SSL Enforced": "Yes",
+            "IAM Authentication": "Enabled",
+            "Public IP Disabled": "Yes",
+            "Allowed CIDR": "172.16.1.0/24",
+            "Database Flags": "general_log=OFF",
+            "Audit Log": "Enabled",
+            "Last Security Patch": "2025-01-10"
+          },
+          "Мониторинг": {
+            "CPU Usage": "18%",
+            "Memory Usage": "39%",
+            "Active Connections": "42 / 500",
+            "Replication Lag": "85 ms",
+            "Transactions/sec": "920 (read-only)",
+            "Query Latency P50": "1 ms",
+            "Query Latency P99": "11 ms",
+            "Health Status": "Degraded",
+            "Open Alerts": "1"
+          },
+          "Обслуживание": {
+            "Backup Schedule": "\u2014 (replica)",
+            "Backup Retention": "\u2014",
+            "Last Backup": "\u2014",
+            "Maintenance Window": "Saturday 05:00\u201306:00 UTC",
+            "Point-in-Time Recovery": "\u2014 (replica)",
+            "Replicas": "\u2014 (is replica of mysql-primary)",
+            "Parameter Profile": "mysql80-fintech-optimized"
+          }
+        }
+      }
+    ],
+    "firewall": [
+      {
+        "id": "allow-https",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / TCP 443",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "1000",
+            "Created": "2024-05-10",
+            "Network": "vpc-fintech-prod",
+            "Description": "Allow HTTPS to gateway servers"
+          },
+          "Правила": {
+            "Protocol": "TCP",
+            "Ports": "443",
+            "Source Ranges": "0.0.0.0/0",
+            "Destination Ranges": "\u2014",
+            "Target Tags": "allow-https",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "gateway-main, gateway-backup, gateway-3",
+            "Network Tags": "allow-https",
+            "Service Accounts": "\u2014"
+          },
+          "Логирование": {
+            "Enabled": "Yes",
+            "Log Retention": "90 days",
+            "Last Matched": "2025-01-20 15:01 UTC"
+          }
+        }
+      },
+      {
+        "id": "allow-vpc",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / All",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "900",
+            "Created": "2024-05-10",
+            "Network": "vpc-fintech-prod",
+            "Description": "Allow all internal VPC traffic"
+          },
+          "Правила": {
+            "Protocol": "All",
+            "Ports": "0\u201365535",
+            "Source Ranges": "172.16.0.0/16",
+            "Destination Ranges": "\u2014",
+            "Target Tags": "allow-vpc",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "All tagged VMs",
+            "Network Tags": "allow-vpc",
+            "Service Accounts": "\u2014"
+          },
+          "Логирование": {
+            "Enabled": "No",
+            "Log Retention": "\u2014",
+            "Last Matched": "\u2014"
+          }
+        }
+      },
+      {
+        "id": "allow-db-fintech",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / TCP 3306",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "800",
+            "Created": "2024-05-10",
+            "Network": "vpc-fintech-prod",
+            "Description": "Allow MySQL from gateway subnet only"
+          },
+          "Правила": {
+            "Protocol": "TCP",
+            "Ports": "3306",
+            "Source Ranges": "172.16.1.0/24",
+            "Destination Ranges": "172.16.3.0/24",
+            "Target Tags": "\u2014",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "mysql-primary, mysql-replica-1",
+            "Network Tags": "\u2014",
+            "Service Accounts": "db-vm-sa@fintech.iam"
+          },
+          "Логирование": {
+            "Enabled": "Yes",
+            "Log Retention": "90 days",
+            "Last Matched": "2025-01-20 14:55 UTC"
+          }
+        }
+      }
+    ],
+    "loadbalancers": [
+      {
+        "id": "lb-gateway-prod",
+        "type": "loadbalancer",
+        "status": "Running",
+        "key_info": "L7 / 44.205.100.50",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Type": "Application (L7)",
+            "Scheme": "Internet-facing",
+            "Algorithm": "Least Connections",
+            "Created": "2024-06-01",
+            "Region": "us-east-2"
+          },
+          "Фронтенд": {
+            "Public IP": "44.205.100.50",
+            "DNS": "lb-gw.us-east-2.elb.fintech.com",
+            "Listen Ports": "443 (HTTPS)",
+            "SSL Certificate": "*.fintech.com (valid until 2026-06-15)",
+            "Security Policy": "TLS-1-3-2023-04",
+            "Idle Timeout": "120 s"
+          },
+          "Бэкенды": {
+            "__table_backends__": {
+              "label": "Бэкенды",
+              "headers": ["Имя", "IP", "Порт", "Состояние", "Вес"],
+              "rows": [
+                ["gateway-main", "172.16.1.20", "443", "Healthy", "1"],
+                ["gateway-backup", "172.16.1.21", "443", "Healthy", "1"],
+                ["gateway-3", "172.16.2.10", "443", "Unhealthy", "1"]
+              ]
+            },
+            "__table_healthcheck__": {
+              "label": "Проверка доступности",
+              "headers": ["Параметр", "Значение"],
+              "rows": [
+                ["Path", "/status"],
+                ["Protocol", "HTTPS"],
+                ["Interval", "15 s"],
+                ["Timeout", "3 s"],
+                ["Unhealthy Threshold", "2"],
+                ["Healthy Threshold", "3"]
+              ]
+            }
+          },
+          "Мониторинг": {
+            "Requests/sec": "8,400",
+            "Active Connections": "3,200",
+            "Bandwidth In": "380 Mbps",
+            "Bandwidth Out": "620 Mbps",
+            "HTTP 5xx Rate": "0.6%",
+            "Healthy Backends": "2 / 3",
+            "Open Alerts": "1"
+          }
+        }
+      }
+    ],
+    "networks": [
+      {
+        "id": "vpc-fintech-prod",
+        "type": "network",
+        "status": "Active",
+        "key_info": "172.16.0.0/16 / us-east-2",
+        "region": "us-east-2",
+        "sections": {
+          "Основные параметры": {
+            "Type": "Custom VPC",
+            "CIDR": "172.16.0.0/16",
+            "Created": "2024-05-01",
+            "Region": "us-east-2",
+            "Routing Mode": "Regional",
+            "__table_subnets__": {
+              "label": "Подсети",
+              "headers": ["Имя", "CIDR", "Зона", "Использовано IP", "Назначение"],
+              "rows": [
+                ["subnet-gateway", "172.16.1.0/24", "us-east-2a/b", "8 / 251", "Gateway VMs"],
+                ["subnet-batch", "172.16.2.0/24", "us-east-2a", "3 / 251", "Batch worker VMs"],
+                ["subnet-db", "172.16.3.0/24", "us-east-2a/b", "4 / 251", "Managed databases"]
+              ]
+            }
+          },
+          "Маршрутизация": {
+            "Default Gateway": "Internet Gateway (igw-7f8e9d0c)",
+            "NAT Gateway": "nat-fintech-1 (172.16.0.5) \u2014 for subnet-batch",
+            "Custom Routes": "\u2014"
+          },
+          "Журнал потоков": {
+            "Enabled": "Yes (subnet-gateway, subnet-db)",
+            "Sampling Rate": "100%",
+            "Log Destination": "cloud-logging"
+          }
+        }
+      }
+    ]
+  }
+}

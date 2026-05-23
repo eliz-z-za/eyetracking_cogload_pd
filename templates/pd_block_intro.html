@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Блок {{ block_num }}</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_block_intro" class="pd-page">
+
+<div class="pd-card" style="text-align:center; margin-top: 80px;">
+    <h1>Блок {{ block_num }} из 2</h1>
+    <h2 style="margin-bottom: 24px;">Готовы начать?</h2>
+    <p>Вас ждут 6 заданий. После каждого задания будет короткая пауза.</p>
+    <p>Напомним: когда найдёте ответ — озвучьте его вслух и нажмите <strong>«Готово»</strong>.</p>
+    <div class="pd-btn-center">
+        <button class="pd-btn" onclick="onStart()">Начать блок</button>
+    </div>
+</div>
+
+<script src="/static/experiment.js"></script>
+<script>
+    function onStart() {
+        sendEvent('PD_BLOCK_INTRO_DONE', {
+            page: 'pd_block_intro',
+            block_num: {{ block_num }}
+        });
+    }
+</script>
+
+</body>
+</html>

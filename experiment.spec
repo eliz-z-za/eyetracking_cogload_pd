@@ -1,0 +1,89 @@
+# -*- mode: python ; coding: utf-8 -*-
+# PyInstaller spec для eyetracking experiment (текущая версия)
+
+block_cipher = None
+
+# Данные для включения в бандл (templates, static/data, paintings, PyOpenGaze)
+datas = [
+    ('templates', 'templates'),
+    ('static', 'static'),
+    ('paintings', 'paintings'),
+    ('PyOpenGaze', 'PyOpenGaze'),
+    ('calib_painting.jpg', '.'),
+]
+
+# Скрытые импорты (могут не подхватиться автоматически)
+hiddenimports = [
+    'flask',
+    'werkzeug',
+    'werkzeug.routing',
+    'jinja2',
+    'PIL',
+    'mss',
+    'mss.windows',
+    'imageio_ffmpeg',
+    'cv2',
+    'webview',
+    'pandas',
+    'numpy',
+    'scipy',
+    'scipy.ndimage',       # gaussian_filter в analysis_paintings.py
+    'scipy.stats',
+    'openpyxl',            # pandas ExcelWriter backend (post_process_paintings)
+    'matplotlib',          # тепловые карты и траектории в analysis_paintings.py
+    'matplotlib.pyplot',
+    'matplotlib.backends.backend_agg',
+]
+
+# Исключить ненужные зависимости (EdgeChromium на Windows не требует Qt)
+excludes = [
+    'PyQt5', 'PyQt6', 'PySide2', 'PySide6',
+]
+
+a = Analysis(
+    ['experiment.py'],
+    pathex=[],
+    binaries=[],
+    datas=datas,
+    hiddenimports=hiddenimports,
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=['runtime_hook_startup_log.py'],
+    excludes=excludes,
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='Experiment',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    console=True,  # True — видеть вывод в консоли (для отладки)
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='Experiment',
+)

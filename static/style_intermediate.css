@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --neutral-bg: #22272B;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.60);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --panel-bg: rgba(255, 255, 255, 0.06);
+    --btn-bg: rgba(0, 120, 210, 0.85);
+    --btn-bg-hover: rgba(0, 120, 210, 1.0);
+    --btn-bg-secondary: rgba(255, 255, 255, 0.08);
+    --btn-bg-danger: rgba(195, 52, 44, 0.75);
+    --btn-bg-danger-hover: rgba(195, 52, 44, 0.92);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    width: 100vw;
+    background: var(--neutral-bg);
+    color: var(--text-primary);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body[data-page-name="welcome"],
+body[data-page-name="instructions"],
+body[data-page-name="tracker_prompt"],
+body[data-page-name="calibration_choice"],
+body[data-page-name="status"],
+body[data-page-name="trial_control"],
+body[data-page-name="paintings_prompt"],
+body[data-page-name="painting_calib_instruction"],
+body[data-page-name="painting_feedback_instruction"],
+body[data-page-name="end"],
+body[data-page-name="experiment_done"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.container {
+    width: min(900px, 92vw);
+    max-width: 900px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 16px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+h2 {
+    margin: 0 0 24px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+p,
+label,
+li,
+.option-row,
+.warning,
+.info {
+    color: var(--text-primary);
+    font-size: 18px;
+}
+
+p {
+    margin: 12px 0;
+}
+
+.input-group,
+.options {
+    margin: 24px 0;
+    text-align: left;
+}
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn,
+.start-btn,
+.btn-primary,
+.btn-secondary,
+.btn-yes,
+.btn-no,
+.btn-danger {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+    color: var(--text-primary);
+    background: var(--btn-bg);
+    padding: 14px 32px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn:hover,
+.start-btn:hover,
+.btn-primary:hover,
+.btn-yes:hover {
+    background: var(--btn-bg-hover);
+}
+
+.btn-secondary,
+.btn-no {
+    background: var(--btn-bg-secondary);
+}
+
+.btn-danger {
+    background: var(--btn-bg-danger);
+}
+
+.btn-danger:hover {
+    background: var(--btn-bg-danger-hover);
+}
+
+button:disabled,
+.start-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    font-size: 18px;
+    font-family: 'Inter', Arial, sans-serif;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #56B9F2;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.error {
+    margin-top: 10px;
+    color: #EB5757;
+    font-size: 16px;
+    display: none;
+}
+
+.warning {
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+
+.trial-info {
+    margin: 16px 0 24px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.12);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px 0;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.files-list {
+    text-align: left;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 18px;
+    margin: 20px 0;
+    color: var(--text-primary);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+body[data-page-name="painting_display"],
+body[data-page-name="painting_calib_display"],
+body[data-page-name="baseline_fixation"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: none;
+    background: var(--neutral-bg);
+}
+
+.instruction {
+    color: var(--text-primary);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.instruction .header {
+    color: var(--text-primary);
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.instruction .row b,
+.instruction .hint {
+    color: var(--text-primary);
+}

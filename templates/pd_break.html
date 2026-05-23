@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Перерыв</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_break" class="pd-page">
+
+<div class="pd-card" style="text-align:center; margin-top: 80px;">
+    <h1>Перерыв</h1>
+    <h2 style="margin-bottom: 24px;">Короткий отдых перед вторым блоком</h2>
+    <p>Сейчас исследователь проведёт повторную калибровку айтрекера.</p>
+    <p>Пожалуйста, оставайтесь на месте.</p>
+    <div class="pd-btn-center" style="margin-top: 32px;">
+        <button class="pd-btn" onclick="onContinue()">Готов к калибровке</button>
+    </div>
+</div>
+
+<script src="/static/experiment.js"></script>
+<script>
+    function onContinue() {
+        sendEvent('PD_BREAK_DONE', { page: 'pd_break' });
+    }
+</script>
+
+</body>
+</html>

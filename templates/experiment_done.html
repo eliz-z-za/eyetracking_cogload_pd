@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Эксперимент завершён</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="experiment_done">
+    <div class="container">
+        <h1>Эксперимент завершён</h1>
+        <p>Все данные сохранены в папке <strong>{{ data_dir }}/</strong></p>
+        <div class="files-list">
+            {% for line in files %}
+            {{ line }}<br>
+            {% endfor %}
+        </div>
+        <button class="btn" onclick="sendEvent('CLOSE_WINDOW', {page: 'experiment_done'}); this.disabled=true; this.textContent='...'">Закрыть</button>
+    </div>
+    <script src="/static/experiment.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Эксперимент</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="welcome">
+    <div class="container">
+        <h1>Начало исследования</h1>
+        <h2>Пожалуйста, введите ваши последние 4 цифры номера телефона</h2>
+        <div class="input-group">
+            <label for="participant-id">ID участника:</label>
+            <input type="text" id="participant-id" placeholder="Например: 5537" autofocus>
+            <div class="error" id="error-msg">Пожалуйста, введите ID участника</div>
+        </div>
+        <button class="start-btn" id="start-btn" onclick="submitId()">Начать</button>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        const input = document.getElementById('participant-id');
+        const errorMsg = document.getElementById('error-msg');
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') submitId();
+            errorMsg.style.display = 'none';
+        });
+
+        function submitId() {
+            const pid = input.value.trim();
+            if (!pid) {
+                errorMsg.style.display = 'block';
+                input.focus();
+                return;
+            }
+            document.getElementById('start-btn').disabled = true;
+            sendEvent('PARTICIPANT_ID', { page: 'welcome', participant_id: pid });
+        }
+    </script>
+</body>
+</html>

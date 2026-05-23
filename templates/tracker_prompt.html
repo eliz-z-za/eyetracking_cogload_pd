@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подключение айтрекера</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="tracker_prompt">
+    <div class="container">
+        <!-- Initial "ready" prompt -->
+        <div id="ready-section">
+            <h1>Подключение к Gazepoint GP3</h1>
+            <p>Убедитесь, что Gazepoint Control запущен.</p>
+            <button class="btn" onclick="trackerReady()">Готово, подключить</button>
+        </div>
+
+        <!-- "No tracker detected" prompt -->
+        <div id="no-tracker-section" style="display: none;">
+            <h1>Айтрекер не обнаружен</h1>
+            <div class="warning" style="display: block;">
+                Gazepoint Control запущен, но айтрекер не подключён.<br>
+                Данные взгляда записаны не будут.
+            </div>
+            <p>Продолжить без айтрекера?</p>
+            <div class="btn-group">
+                <button class="btn btn-danger" onclick="continueWithout()">Продолжить без айтрекера</button>
+                <button class="btn btn-secondary" onclick="cancelExperiment()">Отмена</button>
+            </div>
+        </div>
+
+        <!-- Calibration done prompt (manual GUI mode) -->
+        <div id="calibration-done-section" style="display: none;">
+            <h1>Калибровка</h1>
+            <p>Выполните калибровку в окне Gazepoint Control.</p>
+            <p>Нажмите кнопку после завершения калибровки.</p>
+            <button class="btn" onclick="calibrationDone()">Калибровка завершена</button>
+        </div>
+
+        <!-- Calibration retry prompt -->
+        <div id="calibration-retry-section" style="display: none;">
+            <h1>Результат калибровки</h1>
+            <p id="cal-error-text"></p>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="retryCalibration()">Повторить калибровку</button>
+                <button class="btn btn-secondary" onclick="acceptCalibration()">Принять</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        function trackerReady() {
+            sendEvent('TRACKER_READY', { page: 'tracker_prompt' });
+        }
+        function continueWithout() {
+            sendEvent('TRACKER_SKIP', { page: 'tracker_prompt', action: 'continue' });
+        }
+        function cancelExperiment() {
+            sendEvent('TRACKER_SKIP', { page: 'tracker_prompt', action: 'cancel' });
+        }
+        function calibrationDone() {
+            sendEvent('CALIBRATION_DONE', { page: 'tracker_prompt' });
+        }
+        function retryCalibration() {
+            sendEvent('CALIBRATION_RETRY', { page: 'tracker_prompt', action: 'retry' });
+        }
+        function acceptCalibration() {
+            sendEvent('CALIBRATION_RETRY', { page: 'tracker_prompt', action: 'accept' });
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.container > div').forEach(d => d.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const section = params.get('section');
+            if (section) showSection(section);
+            const calError = params.get('cal_error');
+            if (calError) {
+                const el = document.getElementById('cal-error-text');
+                if (el) el.textContent = calError;
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Инструкция по оценке</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="painting_feedback_instruction">
+    <div class="container">
+        <h1>Оценка картин</h1>
+        <p>
+            После просмотра каждой картины в&nbsp;течение
+            2&nbsp;секунд вам нужно оценить картину,
+            нажимая <strong>Пробел</strong> нужное число раз:
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 16px 0; line-height: 2;">
+            <li><strong>1 нажатие</strong> &mdash; картина не понравилась</li>
+            <li><strong>2 нажатия</strong> &mdash; затрудняюсь оценить</li>
+            <li><strong>3 нажатия</strong> &mdash; картина понравилась</li>
+        </ul>
+        <p style="margin-top: 24px; opacity: 0.7;">
+            Нажмите <strong>Пробел</strong> или <strong>Enter</strong>, чтобы продолжить.
+        </p>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        document.addEventListener('keydown', function handler(e) {
+            if (e.code !== 'Space' && e.code !== 'Enter') return;
+            e.preventDefault();
+            document.removeEventListener('keydown', handler);
+            sendEvent('FEEDBACK_INSTRUCTION_DONE', { page: 'painting_feedback_instruction' });
+        });
+    </script>
+</body>
+</html>

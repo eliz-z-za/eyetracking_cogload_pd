@@ -1,0 +1,971 @@
+/* ===== style_pd.css ===== */
+/* Progressive Disclosure experiment — Consta dark theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    /* Typography — font */
+    --font-base: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Typography — body sizes */
+    --body-s: 12px;   /* бейджи, метки */
+    --body-m: 14px;   /* консоли */
+    --body-l: 16px;   /* инструкции, опросники */
+
+    /* Typography — headings */
+    --h1-size: 32px;
+    --h2-size: 24px;
+    --h3-size: 20px;
+    --heading-weight: 700;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    background: #22272B;
+    color: #FFFFFF;
+    font-family: var(--font-base);
+    font-size: var(--body-m);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== TASK BAR ===== */
+
+#task-bar {
+    height: 56px;
+    background: #2B3035;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    flex-shrink: 0;
+    z-index: 100;
+    gap: 12px;
+}
+
+#task-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+#task-counter {
+    font-size: var(--body-m);
+    color: rgba(255, 255, 255, 0.40);
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.badge-lookup     { background: rgba(0, 120, 210, 0.20);  color: #56B9F2; }
+.badge-comparison { background: rgba(242, 201, 76, 0.18); color: #F2C94C; }
+.badge-diagnosis  { background: rgba(235, 87, 87, 0.20);  color: #EB5757; }
+
+#task-text {
+    font-size: var(--body-m);
+    color: #FFFFFF;
+    flex: 1;
+    min-width: 0;
+}
+
+#task-text code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: var(--body-m);
+    color: #FFFFFF;
+}
+
+#done-btn {
+    background: rgba(0, 120, 210, 0.85);
+    color: #fff;
+    border: 1px solid rgba(0, 120, 210, 1.0);
+    padding: 8px 22px;
+    border-radius: 6px;
+    font-size: var(--body-m);
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+
+#done-btn:hover    { background: rgba(0, 120, 210, 1.0); }
+#done-btn:disabled { background: #22C38E; opacity: 0.50; cursor: default; }
+
+/* ===== MAIN LAYOUT ===== */
+
+#main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+
+#sidebar {
+    width: 200px;
+    background: #1A1E21;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 0;
+    gap: 4px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.40);
+    transition: background 0.1s, color 0.1s;
+    user-select: none;
+}
+
+.sidebar-item:hover  { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.70); }
+.sidebar-item.active { background: rgba(0, 120, 210, 0.20);   color: #56B9F2; }
+
+.sidebar-icon  { font-size: 24px; flex-shrink: 0; display: flex; align-items: center; }
+.sidebar-label { font-size: var(--body-l); font-weight: 400; line-height: 1; }
+
+/* ===== CONTENT WRAPPER ===== */
+
+#content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ===== BREADCRUMB ===== */
+
+#breadcrumb {
+    background: #1A1E21;
+    padding: 8px 20px;
+    font-size: var(--body-m);
+    color: rgba(255, 255, 255, 0.40);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.breadcrumb-link {
+    color: #56B9F2;
+    cursor: pointer;
+}
+.breadcrumb-link:hover { text-decoration: underline; }
+.breadcrumb-sep     { color: rgba(255, 255, 255, 0.20); margin: 0 6px; }
+.breadcrumb-current { color: rgba(255, 255, 255, 0.60); }
+
+/* ===== CONTENT AREA ===== */
+
+#content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 28px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) #22272B;
+}
+
+#content-area::-webkit-scrollbar       { width: 6px; }
+#content-area::-webkit-scrollbar-track { background: #22272B; }
+#content-area::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+
+/* ===== CONTENT HEADING (страница списка ресурсов) ===== */
+
+.content-heading {
+    font-size: var(--h1-size);
+    font-weight: var(--heading-weight);
+    color: #FFFFFF;
+    margin-bottom: 16px;
+}
+
+/* ===== RESOURCE LIST TABLE ===== */
+
+.resource-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.resource-table th {
+    text-align: left;
+    padding: 8px 0;
+    font-size: var(--body-m);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.40);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.resource-table td {
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    color: #FFFFFF;
+    font-size: var(--body-m);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.resource-row { cursor: pointer; }
+.resource-row:hover td { background: rgba(255, 255, 255, 0.05); }
+
+.resource-name {
+    color: #56B9F2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--body-m);
+    font-weight: 500;
+}
+
+.key-info {
+    color: rgba(255, 255, 255, 0.50);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--body-m);
+}
+
+/* ===== STATUS BADGES ===== */
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: var(--body-s);
+    font-weight: 600;
+}
+
+.status-running  { background: rgba(34, 195, 142, 0.18); color: #22C38E; }
+.status-warning  { background: rgba(242, 201, 76, 0.18);  color: #F2C94C; }
+.status-error    { background: rgba(235, 87, 87, 0.20);   color: #EB5757; }
+.status-active   { background: rgba(34, 195, 142, 0.18);  color: #22C38E; }
+.status-degraded { background: rgba(235, 87, 87, 0.20);   color: #EB5757; }
+
+/* ===== RESOURCE DETAIL HEADER ===== */
+
+.resource-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.resource-type-icon { font-size: 22px; color: rgba(255, 255, 255, 0.40); }
+
+.resource-id {
+    font-size: var(--h1-size);
+    font-weight: var(--heading-weight);
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== SECTION BLOCKS ===== */
+
+.section-block { margin-bottom: 0; }
+
+/* Flat condition — non-interactive section header */
+.section-header-flat {
+    font-size: var(--h2-size);
+    font-weight: var(--heading-weight);
+    color: rgba(255, 255, 255, 0.80);
+    padding: 18px 0 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    margin-bottom: 6px;
+}
+
+/* Sections condition — clickable toggle */
+.section-header-toggle {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    font-family: var(--font-base);
+    font-size: var(--h2-size);
+    font-weight: var(--heading-weight);
+    color: rgba(255, 255, 255, 0.80);
+    padding: 16px 0 6px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 0;
+    transition: color 0.1s;
+}
+
+.section-header-toggle:hover { color: rgba(255, 255, 255, 1.0); }
+.section-header-toggle.open  { color: rgba(255, 255, 255, 1.0); }
+
+.chevron { font-size: var(--h2-size); }
+
+/* Section content */
+.section-content {
+    padding: 6px 0 8px 0;
+    overflow: hidden;
+}
+
+.section-content.collapsed { display: none; }
+
+/* ===== KEY-VALUE PAIRS ===== */
+
+.kv-table { width: 100%; }
+
+.kv-row {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    align-items: baseline;
+}
+
+.kv-row:last-child { border-bottom: none; }
+
+.kv-key {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: var(--body-m);
+    padding-right: 12px;
+}
+
+.kv-value {
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--body-m);
+}
+
+/* ===== EMBEDDED TABLES ===== */
+
+.table-label {
+    font-size: var(--h3-size);
+    font-weight: var(--heading-weight);
+    color: rgba(255, 255, 255, 0.80);
+    margin: 16px 0 6px 0;
+}
+
+.embedded-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-bottom: 10px;
+    font-size: var(--body-m);
+}
+
+.embedded-table th {
+    text-align: left;
+    padding: 5px 0;
+    color: rgba(255, 255, 255, 0.40);
+    font-size: var(--body-m);
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.embedded-table td {
+    padding: 6px 0;
+    color: #FFFFFF;
+    font-family: 'JetBrains Mono', monospace;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Health=Unhealthy highlight */
+.embedded-table td.unhealthy { color: #EB5757; }
+
+/* ===== SIMPLE PAGES (questionnaire, instructions, NASA-TLX, etc.) ===== */
+
+.pd-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #22272B;
+    color: #ffffff;
+    font-family: var(--font-base);
+    font-size: var(--body-l);
+}
+
+.pd-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 36px 40px;
+    max-width: 680px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.pd-card h1 {
+    font-size: var(--h1-size);
+    font-weight: var(--heading-weight);
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.pd-card h2 {
+    font-size: var(--h2-size);
+    font-weight: var(--heading-weight);
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.pd-card h3 {
+    font-size: var(--h3-size);
+    font-weight: var(--heading-weight);
+    color: #ffffff;
+    margin-bottom: 14px;
+}
+
+.pd-card p {
+    color: #ffffff;
+    font-size: var(--body-l);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.pd-card ul {
+    color: #ffffff;
+    font-size: var(--body-l);
+    line-height: 1.8;
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+/* Form fields */
+.pd-form-row {
+    margin-bottom: 16px;
+}
+
+.pd-form-row label {
+    display: block;
+    font-size: var(--body-l);
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 6px;
+}
+
+.pd-input, .pd-select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: var(--body-l);
+    padding: 8px 12px;
+    font-family: var(--font-base);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.pd-input:focus, .pd-select:focus { border-color: #56B9F2; }
+.pd-select option { background: #22272B; }
+
+/* Likert scale */
+.likert-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.likert-row label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: var(--body-l);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    flex: 1;
+}
+
+.likert-row input[type="radio"] {
+    accent-color: #0078D2;
+    width: 16px;
+    height: 16px;
+}
+
+/* NASA-TLX sliders */
+.tlx-dimension {
+    margin-bottom: 22px;
+}
+
+.tlx-dimension-name {
+    font-size: var(--body-l);
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.tlx-dimension-desc {
+    font-size: var(--body-l);
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.tlx-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tlx-anchor {
+    font-size: var(--body-l);
+    color: #ffffff;
+    white-space: nowrap;
+    min-width: 50px;
+}
+
+.tlx-anchor.right { text-align: right; }
+
+.tlx-slider-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.tlx-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.18);
+    outline: none;
+    cursor: pointer;
+    display: block;
+}
+
+.tlx-slider::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.tlx-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #0078D2;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    margin-top: -6px;
+}
+
+.tlx-slider:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(0, 120, 210, 0.30), 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.tlx-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 11px;
+    margin-top: 3px;
+}
+
+.tlx-tick {
+    width: 1px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.30);
+    flex-shrink: 0;
+}
+
+.tlx-value {
+    font-size: var(--body-l);
+    color: #ffffff;
+    font-family: 'Inter', Arial, sans-serif;
+    min-width: 28px;
+    text-align: center;
+}
+
+/* Primary button */
+.pd-btn {
+    background: rgba(0, 120, 210, 0.85);
+    color: #ffffff;
+    border: 1px solid rgba(0, 120, 210, 1.0);
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: var(--body-l);
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: background 0.15s;
+    display: inline-block;
+}
+
+.pd-btn:hover { background: rgba(0, 120, 210, 1.0); }
+
+.pd-btn-center {
+    display: flex;
+    justify-content: center;
+}
+
+.pd-btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pd-btn.pd-btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.20);
+}
+
+.pd-btn.pd-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Section divider for forms */
+.pd-section-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 24px 0;
+}
+
+/* ===== COMPACT QUESTIONNAIRE PAGES ===== */
+
+body[data-page-name="pd_prequestionnaire"].pd-page,
+body[data-page-name="pd_nasa_tlx"].pd-page {
+    overflow-y: auto;
+    justify-content: flex-start;
+}
+
+/* Prequestionnaire: dense layout (many form fields) */
+body[data-page-name="pd_prequestionnaire"].pd-page {
+    padding: 14px 12px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card {
+    max-width: 760px;
+    padding: 18px 20px;
+}
+
+/* NASA-TLX: comfortable layout (multi-step questionnaire) */
+body[data-page-name="pd_nasa_tlx"].pd-page {
+    padding: 28px 20px;
+}
+
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card {
+    max-width: 900px;
+    padding: 28px 36px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card h1,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card h1 {
+    font-size: var(--h1-size);
+    margin-bottom: 10px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card h2,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card h2 {
+    font-size: var(--h2-size);
+    margin-bottom: 12px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card h3,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card h3 {
+    font-size: var(--h3-size);
+    margin-bottom: 10px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card p,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card p,
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-card ul,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card ul {
+    font-size: var(--body-m);
+    line-height: 1.45;
+    margin-bottom: 10px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-form-row,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-form-row {
+    margin-bottom: 10px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-form-row label,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-form-row label {
+    font-size: var(--body-m);
+    margin-bottom: 4px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-input,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-input,
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-select,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-select {
+    font-size: var(--body-m);
+    padding: 6px 10px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .likert-row {
+    gap: 6px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .likert-row label {
+    font-size: var(--body-m);
+    gap: 2px;
+}
+
+body[data-page-name="pd_nasa_tlx"].pd-page .tlx-dimension {
+    margin-bottom: 16px;
+}
+
+body[data-page-name="pd_nasa_tlx"].pd-page .tlx-dimension h2.tlx-dim-title {
+    margin-bottom: 8px;
+}
+
+/* 24px gap from intro paragraph to first scale */
+body[data-page-name="pd_nasa_tlx"].pd-page #step-2 > p,
+body[data-page-name="pd_nasa_tlx"].pd-page #step-3 > p {
+    margin-bottom: 24px;
+}
+
+body[data-page-name="pd_nasa_tlx"].pd-page .tlx-anchor {
+    font-size: var(--body-m);
+    min-width: 60px;
+}
+
+body[data-page-name="pd_prequestionnaire"].pd-page .pd-btn,
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-btn {
+    font-size: var(--body-m);
+    padding: 10px 20px;
+    margin-top: 12px;
+}
+
+/* ===== NASA-TLX MULTI-STEP ===== */
+
+/* Step visibility — shown via JS style.display */
+.tlx-step {
+    display: none;
+}
+
+/* Step indicator dots */
+.tlx-step-indicator {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.tlx-step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.20);
+    transition: background 0.2s;
+}
+
+.tlx-step-dot.active {
+    background: #0078D2;
+}
+
+/* Wide card variant for pairs step */
+.tlx-card-wide {
+    max-width: min(1160px, 95vw) !important;
+    padding: 28px 32px !important;
+}
+
+/* ── Step 2: Scale descriptions ── */
+.tlx-scale-block {
+    margin-bottom: 24px;
+}
+
+.tlx-scale-block:last-of-type {
+    margin-bottom: 0;
+}
+
+.tlx-scale-block h2 {
+    font-size: var(--body-l);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+/* Override compact-mode h2 margin (specificity 0,3,1) for scale block titles */
+body[data-page-name="pd_nasa_tlx"].pd-page .tlx-scale-block h2 {
+    margin-bottom: 4px;
+    font-size: var(--body-l);
+}
+
+.tlx-anchors-note {
+    font-size: var(--body-s);
+    color: rgba(255, 255, 255, 0.45);
+    font-style: italic;
+    margin-bottom: 8px !important;
+    line-height: 1.4 !important;
+}
+
+/* ── Step 3: Slider dimensions ── */
+.tlx-dimension h2.tlx-dim-title {
+    font-size: var(--h2-size);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.tlx-dim-desc {
+    font-size: var(--body-m);
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 10px;
+    line-height: 1.45;
+}
+
+/* ── Step 4: Pairwise comparison grid ── */
+.tlx-pairs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-auto-flow: column;
+    gap: 10px 28px;
+    margin-bottom: 20px;
+    align-items: stretch;
+}
+
+.tlx-pair {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.tlx-pair-label {
+    font-size: var(--body-s);
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 6px;
+}
+
+.tlx-pair-buttons {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    gap: 6px;
+}
+
+.tlx-pair-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: var(--body-m);
+    font-family: var(--font-base);
+    font-weight: 500;
+    padding: 8px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1.35;
+}
+
+.tlx-pair-btn:hover {
+    background: rgba(0, 120, 210, 0.20);
+    border-color: rgba(0, 120, 210, 0.50);
+}
+
+.tlx-pair-btn.selected {
+    background: rgba(0, 120, 210, 0.35);
+    border-color: #0078D2;
+    color: #ffffff;
+}
+
+/* Override specificity: muted colours for step-3 desc and step-2 anchors
+   (compact-mode .pd-card p selector is 0,3,1 — these match it to win by cascade order) */
+body[data-page-name="pd_nasa_tlx"].pd-page .tlx-dim-desc {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: var(--body-m);
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+
+/* Step 1 instructions at body-l (compact mode overrides pd-card p to body-m) */
+body[data-page-name="pd_nasa_tlx"].pd-page #step-1 p {
+    font-size: var(--body-l);
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+/* Step 1 button: match intermediate card style (undo compact-mode reduction) */
+body[data-page-name="pd_nasa_tlx"].pd-page #step-1 .pd-btn {
+    font-size: var(--body-l);
+    padding: 12px 32px;
+    margin-top: 24px;
+}
+
+/* ── Step 4: pairs layout with sidebar ── */
+.tlx-pairs-layout {
+    display: flex;
+    gap: 28px;
+    align-items: stretch;
+    margin-bottom: 0;
+}
+
+.tlx-pairs-sidebar {
+    width: 180px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.tlx-pairs-sidebar-item {
+    /* spacing handled by justify-content: space-evenly */
+}
+
+.tlx-pairs-sidebar-name {
+    font-size: var(--body-s);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.40);
+    margin-bottom: 2px;
+}
+
+.tlx-pairs-sidebar-desc {
+    font-size: var(--body-s);
+    color: rgba(255, 255, 255, 0.24);
+    line-height: 1.4;
+}
+
+body[data-page-name="pd_nasa_tlx"].pd-page .pd-card .tlx-anchors-note {
+    font-size: var(--body-s);
+    color: rgba(255, 255, 255, 0.45);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}

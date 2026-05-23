@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CloudPanel</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_console">
+
+<!-- ===== TASK BAR ===== -->
+<div id="task-bar" data-aoi="task-bar">
+    <div id="task-left">
+        <span id="task-counter">{{ task_index }}&nbsp;/&nbsp;{{ task_total }}</span>
+        <span id="task-text">{{ task.text | safe }}</span>
+    </div>
+    <button id="done-btn" onclick="onDoneClick()">Готово</button>
+</div>
+
+<!-- ===== MAIN LAYOUT ===== -->
+<div id="main-layout">
+
+    <!-- Sidebar -->
+    <nav id="sidebar" data-aoi="sidebar">
+        <div class="sidebar-item" data-type="vms"           onclick="onSidebarClick('vms')">
+            <span class="sidebar-icon">⬡</span>
+            <span class="sidebar-label">Виртуальные машины</span>
+        </div>
+        <div class="sidebar-item" data-type="dbs"           onclick="onSidebarClick('dbs')">
+            <span class="sidebar-icon">⊞</span>
+            <span class="sidebar-label">Базы данных</span>
+        </div>
+        <div class="sidebar-item" data-type="firewall"      onclick="onSidebarClick('firewall')">
+            <span class="sidebar-icon">⊘</span>
+            <span class="sidebar-label">Правила файрвола</span>
+        </div>
+        <div class="sidebar-item" data-type="loadbalancers" onclick="onSidebarClick('loadbalancers')">
+            <span class="sidebar-icon">◎</span>
+            <span class="sidebar-label">Балансировщики нагрузки</span>
+        </div>
+        <div class="sidebar-item" data-type="networks"      onclick="onSidebarClick('networks')">
+            <span class="sidebar-icon">⬢</span>
+            <span class="sidebar-label">Сети</span>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div id="content-wrapper">
+        <div id="breadcrumb" data-aoi="breadcrumb"></div>
+        <div id="content-area"></div>
+    </div>
+
+</div>
+
+<!-- ===== Data injection ===== -->
+<script src="/static/experiment.js"></script>
+<script>
+    const CONDITION  = {{ condition  | tojson }};
+    const DATASET    = {{ dataset    | tojson }};
+    const TASK       = {{ task       | tojson }};
+    const TASK_INDEX = {{ task_index }};
+    const TASK_TOTAL = {{ task_total }};
+    const BLOCK_NUM  = {{ block_num  }};
+</script>
+<script src="/static/pd_console.js"></script>
+
+</body>
+</html>

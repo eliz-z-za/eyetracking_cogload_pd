@@ -1,0 +1,586 @@
+{
+  "name": "alpha",
+  "label": "E-commerce Platform",
+  "resources": {
+    "vms": [
+      {
+        "id": "api-prod-1",
+        "type": "vm",
+        "status": "Running",
+        "key_info": "10.0.1.45 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard D4s v3",
+            "vCPU": "4",
+            "RAM": "16 GB",
+            "OS": "Ubuntu 22.04 LTS",
+            "Image": "ubuntu-2204-lts-v20240815",
+            "Created": "2024-08-12",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1a",
+            "Uptime": "47d 13h"
+          },
+          "Сеть": {
+            "Private IP": "10.0.1.45",
+            "Public IP": "52.31.118.204",
+            "Subnet": "10.0.1.0/24",
+            "Subnet Name": "subnet-app",
+            "VPC": "vpc-production",
+            "Internal DNS": "api-prod-1.internal",
+            "MAC Address": "02:42:ac:11:00:2d"
+          },
+          "Диски": {
+            "Boot Disk": "30 GB SSD (pd-ssd)",
+            "Data Disk": "250 GB SSD (pd-ssd)",
+            "IOPS": "3000 read / 3000 write",
+            "Throughput": "125 MB/s",
+            "Encryption": "AES-256 (platform-managed)",
+            "Snapshots": "3 (latest: 2025-01-18)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-app-prod",
+            "Firewall Tags": "allow-http, allow-internal",
+            "SSH Key": "deploy-key-prod (RSA 4096)",
+            "Service Account": "app-vm-sa@project.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "67%",
+            "Memory Usage": "74%",
+            "Disk Read Ops": "450 ops/s",
+            "Disk Write Ops": "120 ops/s",
+            "Network In": "120 Mbps",
+            "Network Out": "85 Mbps",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "backend",
+            "Application": "api-gateway",
+            "Version": "2.14.3",
+            "Cost Center": "CC-4401",
+            "Startup Script": "/opt/scripts/start-api.sh"
+          }
+        }
+      },
+      {
+        "id": "api-prod-2",
+        "type": "vm",
+        "status": "Running",
+        "key_info": "10.0.1.46 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard D4s v3",
+            "vCPU": "4",
+            "RAM": "16 GB",
+            "OS": "Ubuntu 22.04 LTS",
+            "Image": "ubuntu-2204-lts-v20240815",
+            "Created": "2024-08-12",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1b",
+            "Uptime": "47d 13h"
+          },
+          "Сеть": {
+            "Private IP": "10.0.1.46",
+            "Public IP": "52.31.118.210",
+            "Subnet": "10.0.1.0/24",
+            "Subnet Name": "subnet-app",
+            "VPC": "vpc-production",
+            "Internal DNS": "api-prod-2.internal",
+            "MAC Address": "02:42:ac:11:00:2e"
+          },
+          "Диски": {
+            "Boot Disk": "30 GB SSD (pd-ssd)",
+            "Data Disk": "250 GB SSD (pd-ssd)",
+            "IOPS": "3000 read / 3000 write",
+            "Throughput": "125 MB/s",
+            "Encryption": "AES-256 (platform-managed)",
+            "Snapshots": "3 (latest: 2025-01-18)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-app-prod",
+            "Firewall Tags": "allow-http, allow-internal",
+            "SSH Key": "deploy-key-prod (RSA 4096)",
+            "Service Account": "app-vm-sa@project.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "52%",
+            "Memory Usage": "81%",
+            "Disk Read Ops": "380 ops/s",
+            "Disk Write Ops": "95 ops/s",
+            "Network In": "95 Mbps",
+            "Network Out": "70 Mbps",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "backend",
+            "Application": "api-gateway",
+            "Version": "2.14.3",
+            "Cost Center": "CC-4401",
+            "Startup Script": "/opt/scripts/start-api.sh"
+          }
+        }
+      },
+      {
+        "id": "api-prod-3",
+        "type": "vm",
+        "status": "Running",
+        "key_info": "10.0.2.12 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard E4s v3",
+            "vCPU": "4",
+            "RAM": "32 GB",
+            "OS": "Debian 12",
+            "Image": "debian-12-v20240901",
+            "Created": "2024-06-01",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1a",
+            "Uptime": "112d 5h"
+          },
+          "Сеть": {
+            "Private IP": "10.0.2.12",
+            "Public IP": "\u2014",
+            "Subnet": "10.0.2.0/24",
+            "Subnet Name": "subnet-workers",
+            "VPC": "vpc-production",
+            "Internal DNS": "api-prod-3.internal",
+            "MAC Address": "02:42:ac:11:00:3a"
+          },
+          "Диски": {
+            "Boot Disk": "30 GB SSD (pd-ssd)",
+            "Data Disk": "500 GB HDD (pd-standard)",
+            "IOPS": "750 read / 750 write",
+            "Throughput": "60 MB/s",
+            "Encryption": "AES-256 (platform-managed)",
+            "Snapshots": "1 (latest: 2025-01-12)"
+          },
+          "Безопасность": {
+            "Security Group": "sg-app-prod",
+            "Firewall Tags": "allow-http, allow-internal",
+            "SSH Key": "deploy-key-prod (RSA 4096)",
+            "Service Account": "api-vm-sa@project.iam",
+            "IAM Role": "roles/compute.instanceAdmin"
+          },
+          "Мониторинг": {
+            "CPU Usage": "58%",
+            "Memory Usage": "64%",
+            "Disk Read Ops": "310 ops/s",
+            "Disk Write Ops": "140 ops/s",
+            "Network In": "95 Mbps",
+            "Network Out": "60 Mbps",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "production",
+            "Team": "backend",
+            "Application": "api-gateway",
+            "Version": "1.8.0",
+            "Cost Center": "CC-4402",
+            "Startup Script": "/opt/scripts/start-api.sh"
+          }
+        }
+      },
+      {
+        "id": "ecom-api-1",
+        "type": "vm",
+        "status": "Stopped",
+        "key_info": "10.0.10.5 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Machine Type": "Standard B2s",
+            "vCPU": "2",
+            "RAM": "4 GB",
+            "OS": "Debian 12 (Bookworm)",
+            "Image": "debian-12-bookworm-v20241210",
+            "Created": "2024-12-10",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1b",
+            "Uptime": "0d 0h (stopped)"
+          },
+          "Сеть": {
+            "Private IP": "10.0.10.5",
+            "Public IP": "—",
+            "Subnet": "10.0.10.0/24",
+            "Subnet Name": "subnet-staging",
+            "VPC": "vpc-production",
+            "Internal DNS": "ecom-api-1.internal",
+            "MAC Address": "02:42:ac:1a:00:05"
+          },
+          "Диски": {
+            "Boot Disk": "20 GB SSD (pd-ssd)",
+            "Data Disk": "—",
+            "IOPS": "—",
+            "Throughput": "—",
+            "Encryption": "AES-256 (platform-managed)",
+            "Snapshots": "0"
+          },
+          "Безопасность": {
+            "Security Group": "sg-staging",
+            "Firewall Tags": "allow-internal",
+            "SSH Key": "deploy-key-staging (RSA 4096)",
+            "Service Account": "staging-vm-sa@project.iam",
+            "IAM Role": "roles/compute.viewer"
+          },
+          "Мониторинг": {
+            "CPU Usage": "0%",
+            "Memory Usage": "0%",
+            "Health Status": "Stopped",
+            "Open Alerts": "0"
+          },
+          "Метаданные": {
+            "Environment": "staging",
+            "Team": "backend",
+            "Application": "api-gateway",
+            "Version": "2.15.0-rc1",
+            "Cost Center": "CC-4401"
+          }
+        }
+      }
+    ],
+    "dbs": [
+      {
+        "id": "postgres-prod",
+        "type": "db",
+        "status": "Running",
+        "key_info": "PostgreSQL 15.4 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Engine": "PostgreSQL 15.4",
+            "Tier": "db-custom-8-32768 (8 vCPU, 32 GB)",
+            "Created": "2024-03-20",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1a",
+            "Uptime": "203d 9h",
+            "High Availability": "Enabled (failover: eu-west-1b)"
+          },
+          "Сеть": {
+            "Private IP": "10.0.3.10",
+            "Public IP": "\u2014 (disabled)",
+            "Subnet": "10.0.3.0/24",
+            "Subnet Name": "subnet-data",
+            "VPC": "vpc-production",
+            "Connection Endpoint": "10.0.3.10:5432",
+            "Authorized Networks": "10.0.1.0/24, 10.0.2.0/24",
+            "SSL Mode": "require"
+          },
+          "Хранилище": {
+            "Disk Type": "SSD (pd-ssd)",
+            "Data Disk": "500 GB",
+            "Used Space": "347 GB (69.4%)",
+            "Auto Resize": "Enabled (max 1 TB)",
+            "IOPS": "6000 read / 6000 write",
+            "Throughput": "250 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Backup Size": "285 GB"
+          },
+          "Безопасность": {
+            "SSL Enforced": "Yes",
+            "IAM Authentication": "Enabled",
+            "Public IP Disabled": "Yes",
+            "Allowed CIDR": "10.0.1.0/24, 10.0.2.0/24",
+            "Database Flags": "log_connections=on, log_disconnections=on",
+            "Audit Log": "Enabled",
+            "Last Security Patch": "2025-01-08"
+          },
+          "Мониторинг": {
+            "CPU Usage": "38%",
+            "Memory Usage": "62%",
+            "Active Connections": "87 / 200",
+            "Replication Lag": "0 ms (primary)",
+            "Transactions/sec": "1,240",
+            "Query Latency P50": "4 ms",
+            "Query Latency P99": "28 ms",
+            "Health Status": "Healthy",
+            "Open Alerts": "0"
+          },
+          "Обслуживание": {
+            "Backup Schedule": "Daily 03:00 UTC",
+            "Backup Retention": "30 days",
+            "Last Backup": "2025-01-20 03:00 UTC",
+            "Maintenance Window": "Sunday 04:00\u201305:00 UTC",
+            "Point-in-Time Recovery": "Enabled (7 days)",
+            "Replicas": "1 (postgres-replica-1)",
+            "Parameter Profile": "pg15-optimized-oltp"
+          }
+        }
+      },
+      {
+        "id": "postgres-replica-1",
+        "type": "db",
+        "status": "Running",
+        "key_info": "PostgreSQL 15.4 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Engine": "PostgreSQL 15.4",
+            "Tier": "db-custom-4-16384 (4 vCPU, 16 GB)",
+            "Created": "2024-03-22",
+            "Region": "eu-west-1",
+            "Zone": "eu-west-1b",
+            "Uptime": "203d 7h",
+            "High Availability": "\u2014 (read replica)"
+          },
+          "Сеть": {
+            "Private IP": "10.0.3.11",
+            "Public IP": "\u2014 (disabled)",
+            "Subnet": "10.0.3.0/24",
+            "Subnet Name": "subnet-data",
+            "VPC": "vpc-production",
+            "Connection Endpoint": "10.0.3.11:5432",
+            "Authorized Networks": "10.0.1.0/24",
+            "SSL Mode": "require"
+          },
+          "Хранилище": {
+            "Disk Type": "SSD (pd-ssd)",
+            "Data Disk": "500 GB",
+            "Used Space": "347 GB (69.4%)",
+            "Auto Resize": "Enabled (max 1 TB)",
+            "IOPS": "3000 read / 3000 write",
+            "Throughput": "125 MB/s",
+            "Encryption": "AES-256 (CMEK)",
+            "Backup Size": "\u2014"
+          },
+          "Безопасность": {
+            "SSL Enforced": "Yes",
+            "IAM Authentication": "Enabled",
+            "Public IP Disabled": "Yes",
+            "Allowed CIDR": "10.0.1.0/24",
+            "Database Flags": "log_connections=on",
+            "Audit Log": "Enabled",
+            "Last Security Patch": "2025-01-08"
+          },
+          "Мониторинг": {
+            "CPU Usage": "95.54%",
+            "Memory Usage": "68%",
+            "Active Connections": "34 / 200",
+            "Replication Lag": "120 ms",
+            "Transactions/sec": "410 (read-only)",
+            "Query Latency P50": "3 ms",
+            "Query Latency P99": "15 ms",
+            "Health Status": "Degraded",
+            "Open Alerts": "2"
+          },
+          "Обслуживание": {
+            "Backup Schedule": "\u2014 (replica)",
+            "Backup Retention": "\u2014",
+            "Last Backup": "\u2014",
+            "Maintenance Window": "Sunday 04:00\u201305:00 UTC",
+            "Point-in-Time Recovery": "\u2014 (replica)",
+            "Replicas": "\u2014 (is replica of postgres-prod)",
+            "Parameter Profile": "pg15-optimized-oltp"
+          }
+        }
+      }
+    ],
+    "firewall": [
+      {
+        "id": "allow-http",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / TCP 80, 443",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "1000",
+            "Created": "2024-03-15",
+            "Network": "vpc-production",
+            "Description": "Allow HTTP/HTTPS to app servers"
+          },
+          "Правила": {
+            "Protocol": "TCP",
+            "Ports": "80, 443",
+            "Source Ranges": "0.0.0.0/0",
+            "Destination Ranges": "\u2014",
+            "Target Tags": "allow-http",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "api-prod-1, api-prod-2, api-prod-3",
+            "Network Tags": "allow-http",
+            "Service Accounts": "\u2014"
+          },
+          "Логирование": {
+            "Enabled": "Yes",
+            "Log Retention": "90 days",
+            "Last Matched": "2025-01-20 14:32 UTC"
+          }
+        }
+      },
+      {
+        "id": "allow-internal",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / All",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "900",
+            "Created": "2024-03-15",
+            "Network": "vpc-production",
+            "Description": "Allow all internal VPC traffic"
+          },
+          "Правила": {
+            "Protocol": "All",
+            "Ports": "0\u201365535",
+            "Source Ranges": "10.0.0.0/16",
+            "Destination Ranges": "\u2014",
+            "Target Tags": "allow-internal",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "All tagged VMs",
+            "Network Tags": "allow-internal",
+            "Service Accounts": "\u2014"
+          },
+          "Логирование": {
+            "Enabled": "No",
+            "Log Retention": "\u2014",
+            "Last Matched": "\u2014"
+          }
+        }
+      },
+      {
+        "id": "allow-db-access",
+        "type": "firewall",
+        "status": "Active",
+        "key_info": "Ingress / TCP 5432",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Direction": "Ingress",
+            "Priority": "800",
+            "Created": "2024-03-20",
+            "Network": "vpc-production",
+            "Description": "Allow PostgreSQL from app subnet only"
+          },
+          "Правила": {
+            "Protocol": "TCP",
+            "Ports": "5432",
+            "Source Ranges": "10.0.1.0/24",
+            "Destination Ranges": "10.0.3.0/24",
+            "Target Tags": "\u2014",
+            "Action": "Allow"
+          },
+          "Применение": {
+            "Applied To": "postgres-prod, postgres-replica-1",
+            "Network Tags": "\u2014",
+            "Service Accounts": "db-vm-sa@project.iam"
+          },
+          "Логирование": {
+            "Enabled": "Yes",
+            "Log Retention": "90 days",
+            "Last Matched": "2025-01-20 14:28 UTC"
+          }
+        }
+      }
+    ],
+    "loadbalancers": [
+      {
+        "id": "lb-api-prod",
+        "type": "loadbalancer",
+        "status": "Running",
+        "key_info": "L7 / 52.31.200.15",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Type": "Application (L7)",
+            "Scheme": "Internet-facing",
+            "Algorithm": "Round Robin",
+            "Created": "2024-04-10",
+            "Region": "eu-west-1"
+          },
+          "Фронтенд": {
+            "Public IP": "52.31.200.15",
+            "DNS": "lb-api-prod.eu-west-1.elb.example.com",
+            "Listen Ports": "443 (HTTPS)",
+            "SSL Certificate": "*.example.com (valid until 2026-03-01)",
+            "Security Policy": "TLS-1-2-Ext-2021-06",
+            "Idle Timeout": "60 s"
+          },
+          "Бэкенды": {
+            "__table_backends__": {
+              "label": "Бэкенды",
+              "headers": ["Имя", "IP", "Порт", "Состояние", "Вес"],
+              "rows": [
+                ["api-prod-1", "10.0.1.45", "443", "Healthy", "1"],
+                ["api-prod-2", "10.0.1.46", "443", "Healthy", "1"],
+                ["api-prod-3", "10.0.2.12", "443", "Healthy", "1"]
+              ]
+            },
+            "__table_healthcheck__": {
+              "label": "Проверка доступности",
+              "headers": ["Параметр", "Значение"],
+              "rows": [
+                ["Path", "/healthz"],
+                ["Protocol", "HTTPS"],
+                ["Interval", "30 s"],
+                ["Timeout", "5 s"],
+                ["Unhealthy Threshold", "3"],
+                ["Healthy Threshold", "2"]
+              ]
+            }
+          },
+          "Мониторинг": {
+            "Requests/sec": "5,200",
+            "Active Connections": "1,840",
+            "Bandwidth In": "220 Mbps",
+            "Bandwidth Out": "450 Mbps",
+            "HTTP 5xx Rate": "0.4%",
+            "Healthy Backends": "3 / 3",
+            "Open Alerts": "0"
+          }
+        }
+      }
+    ],
+    "networks": [
+      {
+        "id": "vpc-production",
+        "type": "network",
+        "status": "Active",
+        "key_info": "10.0.0.0/16 / eu-west-1",
+        "region": "eu-west-1",
+        "sections": {
+          "Основные параметры": {
+            "Type": "Custom VPC",
+            "CIDR": "10.0.0.0/16",
+            "Created": "2024-03-10",
+            "Region": "eu-west-1",
+            "Routing Mode": "Regional",
+            "__table_subnets__": {
+              "label": "Подсети",
+              "headers": ["Имя", "CIDR", "Зона", "Использовано IP", "Назначение"],
+              "rows": [
+                ["subnet-app", "10.0.1.0/24", "eu-west-1a/b", "12 / 251", "Application VMs"],
+                ["subnet-workers", "10.0.2.0/24", "eu-west-1a", "3 / 251", "Worker VMs"],
+                ["subnet-data", "10.0.3.0/24", "eu-west-1a/b", "4 / 251", "Managed databases"]
+              ]
+            }
+          },
+          "Маршрутизация": {
+            "Default Gateway": "Internet Gateway (igw-0a1b2c3d)",
+            "NAT Gateway": "nat-prod-1 (10.0.0.5) \u2014 for subnet-workers",
+            "Custom Routes": "\u2014"
+          },
+          "Журнал потоков": {
+            "Enabled": "Yes (subnet-app, subnet-data)",
+            "Sampling Rate": "50%",
+            "Log Destination": "cloud-logging"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калибровка</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="painting_calib_instruction">
+    <div class="container">
+        <h1>Калибровка</h1>
+        <p>
+            Сейчас вам будет показана картина с кружками.<br>
+            Пожалуйста, смотрите на каждый кружок по очереди.<br>
+            Задержите взгляд на каждом кружке примерно на&nbsp;пару секунд.
+        </p>
+        <p style="margin-top:24px; opacity:0.7;">Нажмите <strong>Пробел</strong> или <strong>Enter</strong>, чтобы продолжить.</p>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        document.addEventListener('keydown', function handler(e) {
+            if (e.code !== 'Space' && e.code !== 'Enter') return;
+            e.preventDefault();
+            document.removeEventListener('keydown', handler);
+            sendEvent('CALIB_INSTRUCTION_DONE', { page: 'painting_calib_instruction' });
+        });
+    </script>
+</body>
+</html>

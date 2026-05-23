@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калибровка</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="calibration_choice">
+    <div class="container">
+        <h1>Калибровка айтрекера</h1>
+        <p>Выберите способ калибровки:</p>
+        <div class="btn-group">
+            <button class="btn btn-secondary" onclick="choose('programmatic')">Программная (P)</button>
+            <button class="btn btn-primary" onclick="choose('gui')">Через GUI Gazepoint (G)</button>
+        </div>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        function choose(method) {
+            sendEvent('CALIBRATION_CHOICE', {
+                page: 'calibration_choice',
+                method: method,
+            });
+        }
+    </script>
+</body>
+</html>

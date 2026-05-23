@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренировочное задание</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_practice_intro" class="pd-page">
+
+<div class="pd-card" style="text-align:center; margin-top: 80px;">
+    <h1>Тренировочное задание</h1>
+    {% if block_num == 2 %}
+    <h2 style="margin-bottom: 24px;">Знакомство с новым интерфейсом</h2>
+    <p>Второй блок использует другой интерфейс консоли. Выполните одно тренировочное задание, чтобы освоиться.</p>
+    {% else %}
+    <h2 style="margin-bottom: 24px;">Знакомство с интерфейсом</h2>
+    <p>Сейчас вы выполните одно тренировочное задание, чтобы освоиться с консолью.</p>
+    {% endif %}
+    <p>Результат тренировочного задания <strong>не учитывается</strong> в эксперименте.</p>
+    <div class="pd-btn-center">
+        <button class="pd-btn" onclick="onContinue()">Начать</button>
+    </div>
+</div>
+
+<script src="/static/experiment.js"></script>
+<script>
+    function onContinue() {
+        sendEvent('PD_PRACTICE_INTRO_DONE', { page: 'pd_practice_intro' });
+    }
+</script>
+
+</body>
+</html>

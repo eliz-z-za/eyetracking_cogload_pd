@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>NASA-TLX — Блок {{ block_num }}</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_nasa_tlx" class="pd-page">
+
+<div class="pd-card">
+
+    <!-- Индикатор шага -->
+    <div class="tlx-step-indicator">
+        <span class="tlx-step-dot active" id="dot-1"></span>
+        <span class="tlx-step-dot" id="dot-2"></span>
+        <span class="tlx-step-dot" id="dot-3"></span>
+        <span class="tlx-step-dot" id="dot-4"></span>
+    </div>
+
+    <!-- ===== ШАГ 1: Инструкция ===== -->
+    <div id="step-1" class="tlx-step">
+        <h1>Оценка нагрузки — Блок {{ block_num }}</h1>
+
+        <p>Данный опросник направлен на оценку Вашего опыта выполнения только что завершённого блока заданий. Мы хотели бы оценить различные аспекты этого опыта, поэтому в опроснике представлены шкалы, направленные на измерение этих аспектов.</p>
+
+        <p>На следующей странице представлены описания каждой шкалы. Пожалуйста, внимательно их прочитайте и убедитесь, что Вам понятно содержание каждой шкалы. Если у Вас есть какие-либо вопросы, обязательно задайте их исследователю. Описание шкал будет доступно в течение исследования.</p>
+
+        <p>После этого Вам будет необходимо <b>описать те субъективные ощущения, которые Вы получили при его выполнении. Слайдером укажите на каждой из шести шкал то место, которое соответствует Вашим субъективным ощущениям.</b></p>
+
+        <p>После этого Вам будет необходимо оценить каждый аспект своего опыта по шкале от «Низкая» до «Высокая».<b> Обратите внимание, что шкала «Качество выполнения задания» варьируется от «отлично» слева до «ужасно» справа.</b> </p>
+
+        <p>После этого Вам будет необходимо сравнить шкалы попарно и указать, какой из них сильнее повлиял на Вашу общий опыт.</p>
+        
+        <p>Старайтесь анализировать каждый аспект своего опыта, обозначенный шкалой, отдельно от других. Ваше активное участие необходимо для успешного проведения исследования, и мы будем благодарны Вам за уделенное внимание.</p>
+
+        <p>Если у Вас остались вопросы, пожалуйста, обратитесь к исследователю.</p>
+
+        <div class="pd-btn-center">
+            <button class="pd-btn" onclick="showStep(2)">Далее</button>
+        </div>
+    </div>
+
+    <!-- ===== ШАГ 2: Описание шкал ===== -->
+    <div id="step-2" class="tlx-step">
+        <h1>Описание шкал</h1>
+        <p>Ознакомьтесь с каждой шкалой. Описание шкал будет доступен Вам в течение всего исследования — обратитесь к экспериментатору при необходимости.</p>
+
+        <div class="tlx-scale-block">
+            <h2>Умственная нагрузка</h2>
+            <p class="tlx-anchors-note">Низкая → Высокая</p>
+            <p>Как много умственных усилий, как вам показалось на первый взгляд, требовалось для выполнения задания? (при размышлении, принятии решений, запоминании, поиске и др.) Задание было лёгким или трудным, простым или сложным, изнурительным или щадящим?</p>
+        </div>
+
+        <div class="tlx-scale-block">
+            <h2>Давление времени</h2>
+            <p class="tlx-anchors-note">Слабое → Сильное</p>
+            <p>Насколько сильно ощущалась нехватка времени при выполнении задания? Был ли ход выполнения задания спокойным и неторопливым или, наоборот, быстрым и бурным?</p>
+        </div>
+
+        <div class="tlx-scale-block">
+            <h2>Успешность выполнения</h2>
+            <p class="tlx-anchors-note">Отлично → Ужасно</p>
+            <p>Как вы думаете, насколько успешно было выполнено задание? Насколько вы довольны ходом выполнения задания?</p>
+        </div>
+
+        <div class="tlx-scale-block">
+            <h2>Усилия</h2>
+            <p class="tlx-anchors-note">Низкие → Высокие</p>
+            <p>Сколько усилий на самом деле вы приложили для выполнения задания (умственных и/или физических) для достигнутого вами результата?</p>
+        </div>
+
+        <div class="tlx-scale-block">
+            <h2>Уровень фрустрации</h2>
+            <p class="tlx-anchors-note">Низкий → Высокий</p>
+            <p>Насколько неуверено в себе, разочарованно, раздражённо или напряжённо вы чувствовали себя в ходе выполнения задания? Или же наоборот, вы были уверены в себе, а выполнение задания было приятным и расслабленным?</p>
+        </div>
+
+        <div class="pd-btn-row">
+            <button class="pd-btn pd-btn-secondary" onclick="showStep(1)">Назад</button>
+            <button class="pd-btn" onclick="showStep(3)">Далее</button>
+        </div>
+    </div>
+
+    <!-- ===== ШАГ 3: Оценка по шкалам ===== -->
+    <div id="step-3" class="tlx-step">
+        <h1>Оцените нагрузку</h1>
+        <p>Опишите те субъективные ощущения, которые Вы получили при выполнении блока. Поставьте отметку на каждой шкале в том месте, которое соответствует Вашим субъективным ощущениям.</p>
+
+        <div class="tlx-dimension">
+            <h2 class="tlx-dim-title">Умственная нагрузка</h2>
+            <p class="tlx-dim-desc">Как много умственных усилий, как вам показалось на первый взгляд, требовалось для выполнения задания?</p>
+            <div class="tlx-slider-row">
+                <span class="tlx-anchor">Низкая</span>
+                <div class="tlx-slider-col">
+                    <input type="range" class="tlx-slider" id="tlx_mental" min="0" max="20" value="10">
+                    <div class="tlx-ticks" aria-hidden="true"></div>
+                </div>
+                <span class="tlx-anchor right">Высокая</span>
+            </div>
+        </div>
+
+        <div class="tlx-dimension">
+            <h2 class="tlx-dim-title">Давление времени</h2>
+            <p class="tlx-dim-desc">Нужно было торопиться, чтобы выполнить задание, или же можно было работать в своём темпе?</p>
+            <div class="tlx-slider-row">
+                <span class="tlx-anchor">Слабое</span>
+                <div class="tlx-slider-col">
+                    <input type="range" class="tlx-slider" id="tlx_temporal" min="0" max="20" value="10">
+                    <div class="tlx-ticks" aria-hidden="true"></div>
+                </div>
+                <span class="tlx-anchor right">Сильное</span>
+            </div>
+        </div>
+
+        <div class="tlx-dimension">
+            <h2 class="tlx-dim-title">Успешность выполнения</h2>
+            <p class="tlx-dim-desc">Как вы думаете, насколько успешно было выполнено задание?</p>
+            <div class="tlx-slider-row">
+                <span class="tlx-anchor">Отлично</span>
+                <div class="tlx-slider-col">
+                    <input type="range" class="tlx-slider" id="tlx_performance" min="0" max="20" value="10">
+                    <div class="tlx-ticks" aria-hidden="true"></div>
+                </div>
+                <span class="tlx-anchor right">Ужасно</span>
+            </div>
+        </div>
+
+        <div class="tlx-dimension">
+            <h2 class="tlx-dim-title">Усилия</h2>
+            <p class="tlx-dim-desc">Сколько усилий на самом деле вы приложили для выполнения задания?</p>
+            <div class="tlx-slider-row">
+                <span class="tlx-anchor">Низкие</span>
+                <div class="tlx-slider-col">
+                    <input type="range" class="tlx-slider" id="tlx_effort" min="0" max="20" value="10">
+                    <div class="tlx-ticks" aria-hidden="true"></div>
+                </div>
+                <span class="tlx-anchor right">Высокие</span>
+            </div>
+        </div>
+
+        <div class="tlx-dimension">
+            <h2 class="tlx-dim-title">Уровень фрустрации</h2>
+            <p class="tlx-dim-desc">Насколько напряженным и раздражающим было задание?</p>
+            <div class="tlx-slider-row">
+                <span class="tlx-anchor">Низкий</span>
+                <div class="tlx-slider-col">
+                    <input type="range" class="tlx-slider" id="tlx_frustration" min="0" max="20" value="10">
+                    <div class="tlx-ticks" aria-hidden="true"></div>
+                </div>
+                <span class="tlx-anchor right">Высокий</span>
+            </div>
+        </div>
+
+        <div class="pd-btn-row">
+            <button class="pd-btn pd-btn-secondary" onclick="showStep(2)">Назад</button>
+            <button class="pd-btn" onclick="onRatingsDone()">Далее</button>
+        </div>
+    </div>
+
+    <!-- ===== ШАГ 4: Попарное сравнение ===== -->
+    <div id="step-4" class="tlx-step">
+        <h1>Сравнение параметров</h1>
+        <p>В каждой из представленных пар выберите тот параметр, который кажется вам более значимым для оценки вашей общей нагрузки при выполнении блока.</p>
+
+        <div class="tlx-pairs-layout">
+        <div class="tlx-pairs-grid">
+
+            <div class="tlx-pair" id="pair-mental_vs_temporal">
+                <div class="tlx-pair-label">Пара 1 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="mental_vs_temporal" data-choice="mental" onclick="choosePair(this)">Умственная нагрузка</button>
+                    <button class="tlx-pair-btn" data-pair="mental_vs_temporal" data-choice="temporal" onclick="choosePair(this)">Давление времени</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-mental_vs_performance">
+                <div class="tlx-pair-label">Пара 2 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="mental_vs_performance" data-choice="mental" onclick="choosePair(this)">Умственная нагрузка</button>
+                    <button class="tlx-pair-btn" data-pair="mental_vs_performance" data-choice="performance" onclick="choosePair(this)">Успешность выполнения</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-mental_vs_effort">
+                <div class="tlx-pair-label">Пара 3 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="mental_vs_effort" data-choice="mental" onclick="choosePair(this)">Умственная нагрузка</button>
+                    <button class="tlx-pair-btn" data-pair="mental_vs_effort" data-choice="effort" onclick="choosePair(this)">Усилия</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-mental_vs_frustration">
+                <div class="tlx-pair-label">Пара 4 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="mental_vs_frustration" data-choice="mental" onclick="choosePair(this)">Умственная нагрузка</button>
+                    <button class="tlx-pair-btn" data-pair="mental_vs_frustration" data-choice="frustration" onclick="choosePair(this)">Уровень фрустрации</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-temporal_vs_performance">
+                <div class="tlx-pair-label">Пара 5 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_performance" data-choice="temporal" onclick="choosePair(this)">Давление времени</button>
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_performance" data-choice="performance" onclick="choosePair(this)">Успешность выполнения</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-temporal_vs_effort">
+                <div class="tlx-pair-label">Пара 6 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_effort" data-choice="temporal" onclick="choosePair(this)">Давление времени</button>
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_effort" data-choice="effort" onclick="choosePair(this)">Усилия</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-temporal_vs_frustration">
+                <div class="tlx-pair-label">Пара 7 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_frustration" data-choice="temporal" onclick="choosePair(this)">Давление времени</button>
+                    <button class="tlx-pair-btn" data-pair="temporal_vs_frustration" data-choice="frustration" onclick="choosePair(this)">Уровень фрустрации</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-performance_vs_effort">
+                <div class="tlx-pair-label">Пара 8 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="performance_vs_effort" data-choice="performance" onclick="choosePair(this)">Успешность выполнения</button>
+                    <button class="tlx-pair-btn" data-pair="performance_vs_effort" data-choice="effort" onclick="choosePair(this)">Усилия</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-performance_vs_frustration">
+                <div class="tlx-pair-label">Пара 9 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="performance_vs_frustration" data-choice="performance" onclick="choosePair(this)">Успешность выполнения</button>
+                    <button class="tlx-pair-btn" data-pair="performance_vs_frustration" data-choice="frustration" onclick="choosePair(this)">Уровень фрустрации</button>
+                </div>
+            </div>
+
+            <div class="tlx-pair" id="pair-effort_vs_frustration">
+                <div class="tlx-pair-label">Пара 10 из 10</div>
+                <div class="tlx-pair-buttons">
+                    <button class="tlx-pair-btn" data-pair="effort_vs_frustration" data-choice="effort" onclick="choosePair(this)">Усилия</button>
+                    <button class="tlx-pair-btn" data-pair="effort_vs_frustration" data-choice="frustration" onclick="choosePair(this)">Уровень фрустрации</button>
+                </div>
+            </div>
+
+        </div><!-- .tlx-pairs-grid -->
+
+        <div class="tlx-pairs-sidebar">
+            <div class="tlx-pairs-sidebar-item">
+                <div class="tlx-pairs-sidebar-name">Умственная нагрузка</div>
+                <div class="tlx-pairs-sidebar-desc">Насколько умственно требовательными были задания: простыми или сложными, лёгкими или изнурительными?</div>
+            </div>
+            <div class="tlx-pairs-sidebar-item">
+                <div class="tlx-pairs-sidebar-name">Давление времени</div>
+                <div class="tlx-pairs-sidebar-desc">Насколько ощущалась нехватка времени? Темп работы был спокойным или бурным?</div>
+            </div>
+            <div class="tlx-pairs-sidebar-item">
+                <div class="tlx-pairs-sidebar-name">Успешность выполнения</div>
+                <div class="tlx-pairs-sidebar-desc">Насколько успешно, по вашему мнению, были выполнены задания? Довольны ли вы результатом?</div>
+            </div>
+            <div class="tlx-pairs-sidebar-item">
+                <div class="tlx-pairs-sidebar-name">Усилия</div>
+                <div class="tlx-pairs-sidebar-desc">Сколько умственных и/или физических усилий вы приложили для достижения результата?</div>
+            </div>
+            <div class="tlx-pairs-sidebar-item">
+                <div class="tlx-pairs-sidebar-name">Уровень фрустрации</div>
+                <div class="tlx-pairs-sidebar-desc">Насколько вы чувствовали себя неуверенно, раздражённо или напряжённо в ходе работы?</div>
+            </div>
+        </div><!-- .tlx-pairs-sidebar -->
+
+        </div><!-- .tlx-pairs-layout -->
+
+        <div class="pd-btn-row">
+            <button class="pd-btn pd-btn-secondary" onclick="goBackToRatings()">Назад</button>
+            <button class="pd-btn" id="btn-submit" onclick="onSubmit()" disabled>Отправить</button>
+        </div>
+    </div>
+
+</div><!-- .pd-card -->
+
+<script src="/static/experiment.js"></script>
+<script>
+    const TOTAL_PAIRS = 10;
+    let ratingsScores = {};
+    const pairsData   = {};
+
+    function showStep(n) {
+        document.querySelectorAll('.tlx-step').forEach(function(el) { el.style.display = 'none'; });
+        document.getElementById('step-' + n).style.display = 'block';
+        document.querySelectorAll('.tlx-step-dot').forEach(function(dot, i) {
+            dot.classList.toggle('active', i < n);
+        });
+        // Wider card for the pairs step
+        document.querySelector('.pd-card').classList.toggle('tlx-card-wide', n === 4);
+        window.scrollTo(0, 0);
+    }
+
+    function makeTicks() {
+        document.querySelectorAll('.tlx-ticks').forEach(function(container) {
+            for (var i = 0; i <= 20; i++) {
+                var tick = document.createElement('span');
+                tick.className = 'tlx-tick';
+                container.appendChild(tick);
+            }
+        });
+    }
+
+    function goBackToRatings() {
+        if (Object.keys(ratingsScores).length > 0) {
+            document.getElementById('tlx_mental').value = ratingsScores.mental;
+            document.getElementById('tlx_temporal').value = ratingsScores.temporal;
+            document.getElementById('tlx_performance').value = ratingsScores.performance;
+            document.getElementById('tlx_effort').value = ratingsScores.effort;
+            document.getElementById('tlx_frustration').value = ratingsScores.frustration;
+        }
+        showStep(3);
+    }
+
+    function onRatingsDone() {
+        ratingsScores = {
+            mental:      parseInt(document.getElementById('tlx_mental').value),
+            temporal:    parseInt(document.getElementById('tlx_temporal').value),
+            performance: parseInt(document.getElementById('tlx_performance').value),
+            effort:      parseInt(document.getElementById('tlx_effort').value),
+            frustration: parseInt(document.getElementById('tlx_frustration').value)
+        };
+        sendEvent('PD_NASA_TLX_RATINGS_DONE', {
+            page: 'pd_nasa_tlx',
+            block_num: {{ block_num }},
+            scores: ratingsScores
+        });
+        showStep(4);
+    }
+
+    function choosePair(btn) {
+        var pairId = btn.dataset.pair;
+        var choice = btn.dataset.choice;
+        pairsData[pairId] = choice;
+
+        var container = btn.closest('.tlx-pair-buttons');
+        container.querySelectorAll('.tlx-pair-btn').forEach(function(b) {
+            b.classList.remove('selected');
+        });
+        btn.classList.add('selected');
+
+        if (Object.keys(pairsData).length === TOTAL_PAIRS) {
+            document.getElementById('btn-submit').disabled = false;
+        }
+    }
+
+    function onSubmit() {
+        var weights = {mental: 0, temporal: 0, performance: 0, effort: 0, frustration: 0};
+        Object.values(pairsData).forEach(function(choice) {
+            weights[choice]++;
+        });
+
+        sendEvent('PD_NASA_TLX_DONE', {
+            page: 'pd_nasa_tlx',
+            block_num: {{ block_num }},
+            scores: ratingsScores,
+            weights: weights,
+            pairs: pairsData
+        });
+
+        var btn = document.getElementById('btn-submit');
+        btn.disabled = true;
+        btn.textContent = 'Сохранено ✓';
+    }
+
+    // Инициализация
+    makeTicks();
+    showStep(1);
+</script>
+
+</body>
+</html>

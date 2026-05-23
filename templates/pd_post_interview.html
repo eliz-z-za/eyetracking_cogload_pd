@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интервью завершено</title>
+    <link rel="stylesheet" href="/static/style_pd.css">
+</head>
+<body data-page-name="pd_post_interview" class="pd-page" style="justify-content: center;">
+
+<div class="pd-card" style="text-align: center;">
+    <h1>Завершение первой части исследования</h1>
+
+    <p>Сделайте небольшую паузу. Сейчас экспериментатор задаст вам несколько вопросов и расскажет о следующей части исследования.</p>
+
+    <div class="pd-btn-center">
+        <button class="pd-btn" onclick="onFinish()">Перейти к следующей части</button>
+    </div>
+</div>
+
+<script src="/static/experiment.js"></script>
+<script>
+    function onFinish() {
+        sendEvent('PD_INTERVIEW_DONE', { page: 'pd_post_interview' });
+        document.querySelector('.pd-btn').disabled = true;
+        document.querySelector('.pd-btn').textContent = 'Завершено ✓';
+    }
+</script>
+
+</body>
+</html>

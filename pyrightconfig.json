@@ -1,0 +1,4 @@
+{
+  "extraPaths": ["PyOpenGaze"],
+  "reportMissingImports": "warning"
+}

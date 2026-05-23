@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калибровочная картина</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        #painting {
+            width: 100vw;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body data-page-name="painting_calib_display">
+    <img id="painting" src="/calib_painting.jpg" alt="">
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        const DISPLAY_TIME = {{ display_time if display_time is not none else 'null' }};
+        const img = document.getElementById('painting');
+        let viewed = false;
+
+        function finishViewing() {
+            if (viewed) return;
+            viewed = true;
+            sendEvent('CALIB_PAINTING_VIEWED', { page: 'painting_calib_display' });
+        }
+
+        let loadFired = false;
+        function onImageLoaded() {
+            if (loadFired) return;
+            loadFired = true;
+
+            const elemRect = img.getBoundingClientRect();
+            sendEvent('CALIB_PAINTING_LOADED', {
+                page: 'painting_calib_display',
+                img_x: Math.round(elemRect.left),
+                img_y: Math.round(elemRect.top),
+                img_w: Math.round(elemRect.width),
+                img_h: Math.round(elemRect.height),
+                screen_w: window.innerWidth,
+                screen_h: window.innerHeight,
+                natural_w: img.naturalWidth,
+                natural_h: img.naturalHeight,
+                fit_mode: 'contain',
+            });
+
+            if (DISPLAY_TIME !== null) {
+                setTimeout(finishViewing, DISPLAY_TIME * 1000);
+            }
+        }
+
+        img.addEventListener('load', onImageLoaded);
+        if (img.complete && img.naturalWidth > 0) {
+            onImageLoaded();
+        }
+
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        }
+    </script>
+</body>
+</html>

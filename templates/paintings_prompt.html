@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фаза картин</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+</head>
+<body data-page-name="paintings_prompt">
+    <div class="container">
+        <h1>Фаза 2: Картины</h1>
+        <p>Запустить фазу с показом картин?</p>
+        <div class="btn-group">
+            <button class="btn btn-yes" onclick="decide(true)">Да, запустить</button>
+            <button class="btn btn-no" onclick="decide(false)">Пропустить</button>
+        </div>
+    </div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        function decide(yes) {
+            sendEvent('PAINTINGS_DECISION', {
+                page: 'paintings_prompt',
+                run_paintings: yes,
+            });
+        }
+    </script>
+</body>
+</html>

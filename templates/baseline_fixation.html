@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Baseline</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        #cross {
+            color: #fff;
+            font-size: 80px;
+            font-family: 'Inter', Arial, sans-serif;
+            font-weight: 400;
+            line-height: 1;
+            user-select: none;
+        }
+    </style>
+</head>
+<body data-page-name="baseline_fixation">
+    <div id="cross">+</div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        const DURATION = {{ duration }};
+
+        window.addEventListener('load', function () {
+            sendEvent('BASELINE_READY', { page: 'baseline_fixation' });
+            setTimeout(function () {
+                sendEvent('BASELINE_DONE', { page: 'baseline_fixation' });
+            }, DURATION * 1000);
+        });
+    </script>
+</body>
+</html>

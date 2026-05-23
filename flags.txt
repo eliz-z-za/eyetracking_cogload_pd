@@ -1,0 +1,27 @@
+# flags.txt — настройки запуска (можно редактировать без пересборки)
+# Формат: ФЛАГ=значение (true/false/yes/no/1/0 или целое число)
+# Строки с # игнорируются.
+#
+# ⚠️  Перед каждой сессией задай PD_GROUP, PD_DATASET_ORDER и PD_TASK_ORDER_INDEX!
+
+# Мок-режим: не подключаться к GP3 (для тестирования без айтрекера)
+EYE_TRACKER_MOCK=true
+
+# Режим проверки оверлея: писать только курсор мыши вместо взгляда
+CURSOR_ONLY_MODE=true
+
+# Пропустить PD-блоки (перейти сразу к фазе картин, только для отладки)
+PD_SKIP_BLOCKS=false
+
+# Порядок УСЛОВИЙ: 1 = Flat→Sections, 2 = Sections→Flat
+PD_GROUP=1
+
+# Порядок ДАТАСЕТОВ (независимо от PD_GROUP): 1 = Alpha→Beta, 2 = Beta→Alpha
+#   PD_GROUP=1, PD_DATASET_ORDER=1: Блок1=Flat+Alpha,    Блок2=Sections+Beta
+#   PD_GROUP=1, PD_DATASET_ORDER=2: Блок1=Flat+Beta,     Блок2=Sections+Alpha
+#   PD_GROUP=2, PD_DATASET_ORDER=1: Блок1=Sections+Alpha, Блок2=Flat+Beta
+#   PD_GROUP=2, PD_DATASET_ORDER=2: Блок1=Sections+Beta,  Блок2=Flat+Alpha
+PD_DATASET_ORDER=2
+
+# Индекс порядка задач (0-3) из valid_orders в tasks.json
+PD_TASK_ORDER_INDEX=2

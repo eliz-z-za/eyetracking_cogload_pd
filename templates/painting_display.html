@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Картина</title>
+    <link rel="stylesheet" href="/static/style_intermediate.css">
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        #painting {
+            width: 100vw;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+        #cross {
+            display: none;
+            color: #fff;
+            font-size: 80px;
+            font-family: 'Inter', Arial, sans-serif;
+            font-weight: 400;
+            line-height: 1;
+            user-select: none;
+        }
+    </style>
+</head>
+<body data-page-name="painting_display">
+    <img id="painting" src="/paintings/{{ filename }}" alt="">
+    <div id="cross">+</div>
+
+    <script src="/static/experiment.js"></script>
+    <script>
+        const FILENAME = "{{ filename }}";
+        const DISPLAY_TIME = {{ display_time if display_time is not none else 'null' }};
+        const FEEDBACK_TIME = {{ feedback_time }};
+        const img = document.getElementById('painting');
+        const cross = document.getElementById('cross');
+
+        let pressCount = 0;
+        let finished = false;
+        let viewedSent = false;
+        let displayStartTime = null;
+
+        function sendViewed() {
+            if (viewedSent) return;
+            viewedSent = true;
+            sendEvent('PAINTING_VIEWED', {
+                page: 'painting_display',
+                painting: FILENAME,
+            });
+        }
+
+        function showCrossPhase() {
+            if (finished) return;
+            sendViewed();
+            img.style.display = 'none';
+
+            cross.style.display = 'block';
+            setTimeout(finishTrial, FEEDBACK_TIME * 1000);
+        }
+
+        function finishTrial() {
+            if (finished) return;
+            finished = true;
+            if (!viewedSent) sendViewed();
+            sendEvent('PAINTING_RATED', {
+                page: 'painting_display',
+                painting: FILENAME,
+                rating: pressCount,
+            });
+        }
+
+        let loadFired = false;
+        function onImageLoaded() {
+            if (loadFired) return;
+            loadFired = true;
+            displayStartTime = performance.now();
+            const rect = img.getBoundingClientRect();
+            sendEvent('PAINTING_LOADED', {
+                page: 'painting_display',
+                painting: FILENAME,
+                img_x: Math.round(rect.left),
+                img_y: Math.round(rect.top),
+                img_w: Math.round(rect.width),
+                img_h: Math.round(rect.height),
+                screen_w: window.innerWidth,
+                screen_h: window.innerHeight,
+                natural_w: img.naturalWidth,
+                natural_h: img.naturalHeight,
+            });
+
+            if (DISPLAY_TIME !== null) {
+                setTimeout(showCrossPhase, DISPLAY_TIME * 1000);
+            }
+        }
+        img.addEventListener('load', onImageLoaded);
+        if (img.complete && img.naturalWidth > 0) {
+            onImageLoaded();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.repeat) return;
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!finished) {
+                    pressCount++;
+                    sendEvent('SPACEBAR_PRESSED', {
+                        page: 'painting_display',
+                        painting: FILENAME,
+                        press_number: pressCount,
+                        ms_since_display: displayStartTime !== null
+                            ? performance.now() - displayStartTime : null,
+                    });
+                }
+            } else if (e.code === 'ArrowRight') {
+                e.preventDefault();
+                finishTrial();
+            }
+        });
+    </script>
+</body>
+</html>
